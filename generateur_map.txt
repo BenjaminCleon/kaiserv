@@ -1,0 +1,18 @@
+Genrating a map can be achieve by this way:
+    - Create a Bitmap file and save it in assets folder
+    - With your favorite Bitmap editor ( Paint for ever ) assign a color to each color according to this dictionnary:
+     { (0,255,0): grass,
+       (0,180,0): tree,
+       (0,0,255): water,
+       (0,0,100): border water top,
+       (0,0,120): border water down,
+       (0,0,140): border water right
+       (0,0,160): border water left,
+       (0,0,180): border corner top left,
+       (0,0,190): border inside corner top left,
+       (0,0,200): border corner top right,
+       (0,0,210): border inside corner top right,
+       (0,0,220): border corner down right,
+       (0,0,230): border inside corner down right,
+       (0,0,240): border corner down left,
+       (0,0,250): border inside corner down left }
