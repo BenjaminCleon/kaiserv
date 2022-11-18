@@ -49,10 +49,10 @@ class HUD:
         for button in self.button_hud_right:
             if self.button_hud_right[button].rect.collidepoint(pos):
                 # affichage
-                self.button_hud_right[button].who_is_visible = "image_hover"
-                if mouse_action[0]:
+                if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
                     self.button_hud_right[button].who_is_visible = "image_click"
                     #interaction 
+                elif event.type == pg.MOUSEBUTTONUP and event.button == 1 and self.button_hud_right[button].who_is_visible == "image_click":
                     match button:
                         case "build":
                             if self.action == None: self.action = Adding_Building(self.carriere, "assets/upscale_land/Land1a_00049.png")
@@ -72,6 +72,9 @@ class HUD:
                             pass
                         case "water":
                             pass
+                elif self.button_hud_right[button].who_is_visible != "image_click":
+                    self.button_hud_right[button].who_is_visible = "image_hover"
+
             else:
                 self.button_hud_right[button].who_is_visible = ""
 

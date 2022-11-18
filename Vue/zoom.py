@@ -4,7 +4,8 @@ import pygame
 class Zoom:
 
     def __init__(self):
-        self.level_zoom = 40
+        self.init_level_zoom = 40
+        self.level_zoom = self.init_level_zoom
         self.multiplier = self.level_zoom/100
         self.should_scale = False
 
