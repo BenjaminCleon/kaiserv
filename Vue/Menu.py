@@ -23,7 +23,7 @@ class Menu():
         self.pause = False
         #  next lines is for song
         pg.mixer.music.load(music_menu)
-        #pg.mixer.music.play(-1)
+        # pg.mixer.music.play(-1)
         self.volume = pg.mixer.music.get_volume()
 
     def display_main(self):

@@ -1,33 +1,30 @@
 import pygame
+from .basic_action import Basic_Action
 
-class SelectionneurZone:
+
+class SelectionneurZone(Basic_Action):
     OPACITY = 180
-
+    
     def __init__(self, carriere):
-        self.is_progress = False
-        self.carriere = carriere
+        Basic_Action.__init__(self, carriere)
         self.grid_postition_to_place = None
         self.grid_to_draw = []
 
     def initialiser(self, surface):
-        self.is_possible = True
-        self.is_progress = True
+        Basic_Action.initialiser(self)
         self.original_surface = surface
         self.original_surface.set_alpha(SelectionneurZone.OPACITY)
         self.image_to_draw = self.original_surface
         self.pos_without_first_click = (0,0)
-        self.init_scroll = None
-        self.init_zoom  = None
         self.pos_start = None
         self.pos_end   = None
+        self.grid_position_start = None
 
     def events(self, event):
         if self.is_progress:
             self.pos_without_first_click = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self.pos_start = self.pos_without_first_click
-                self.init_scroll = (self.carriere.camera.scroll.x, self.carriere.camera.scroll.y)
-                self.init_zoom   = self.carriere.zoom.level_zoom
             if self.pos_start != None :self.pos_end = self.pos_without_first_click
     
     def draw(self):
@@ -35,12 +32,11 @@ class SelectionneurZone:
         self.image_to_draw = pygame.transform.scale(self.original_surface, (size_of_original_image[0]*self.carriere.zoom.multiplier, size_of_original_image[1]*self.carriere.zoom.multiplier))
         self.grid_to_draw = []
         if self.pos_start is not None:
-            multiplier_for_position = (self.carriere.zoom.level_zoom)/self.init_zoom
-            pos_start = ((self.pos_start[0]+self.carriere.camera.scroll.x-self.init_scroll[0])*multiplier_for_position, (self.pos_start[1]+self.carriere.camera.scroll.y-self.init_scroll[1])*multiplier_for_position )
-            print(pos_start, self.pos_end)
-            grid_position_start = self.mouse_to_grid(self.carriere.current_surface, self.carriere.camera.scroll, self.carriere.controleur.TILE_SIZE*self.carriere.zoom.multiplier, pos_start)
+            if self.grid_position_start == None:
+                self.grid_position_start = self.mouse_to_grid(self.carriere.current_surface, self.carriere.camera.scroll, self.carriere.controleur.TILE_SIZE*self.carriere.zoom.multiplier, self.pos_start)
+            
             grid_position_end   = self.mouse_to_grid(self.carriere.current_surface, self.carriere.camera.scroll, self.carriere.controleur.TILE_SIZE*self.carriere.zoom.multiplier, self.pos_end  )
-            coordinate = self.get_square_coords_from_top_right(grid_position_start, grid_position_end)
+            coordinate = self.get_square_coords_from_top_right(self.grid_position_start, grid_position_end)
             for i in range(coordinate[0][0], coordinate[1][0]+1):
                 for j in range(coordinate[0][1], coordinate[1][1]+1):
                     self.grid_postition_to_place = grid = (round(i), round(j))
