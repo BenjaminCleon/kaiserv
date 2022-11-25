@@ -3,19 +3,19 @@
 from .building import Building
 
 class Monde:
-    def __init__(self, controleur):
+    def __init__(self, tile_size, screen_size):
         self.board = []
-        self.controleur = controleur
-        self.width, self.height = self.controleur.screen.get_size()
+        self.width, self.height = screen_size
+        self.tile_size = tile_size
         self.information_for_each_tile = self.get_information_for_each_tile()
 
     # pour chaque case, nous donnons le rectangle permettant de placer une tile à l'avenir
     def grid_to_board(self, num_lig, num_col, name):
         rect = [
-            (num_lig * self.controleur.TILE_SIZE                            , num_col * self.controleur.TILE_SIZE            ),
-            (num_lig * self.controleur.TILE_SIZE + self.controleur.TILE_SIZE, num_col * self.controleur.TILE_SIZE            ),
-            (num_lig * self.controleur.TILE_SIZE + self.controleur.TILE_SIZE, num_col * self.controleur.TILE_SIZE + self.controleur.TILE_SIZE),
-            (num_lig * self.controleur.TILE_SIZE                            , num_col * self.controleur.TILE_SIZE + self.controleur.TILE_SIZE),
+            (num_lig * self.tile_size                            , num_col * self.tile_size            ),
+            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size            ),
+            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size + self.tile_size),
+            (num_lig * self.tile_size                            , num_col * self.tile_size + self.tile_size),
         ]
 
         # pour le passage en vue isométrique
@@ -71,6 +71,12 @@ class Monde:
 
         return dictionnaire
 
+    def define_matrix_for_path_finding(self):
+        matrix = []
+        for i in range(0,len(self.information_for_each_tile)):
+            for j in range(0, len(self.information_for_each_tile[0])):
+                pass
+            
     def check_if_construction_possible_on_grid(self,grid):
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
 

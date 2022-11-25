@@ -1,4 +1,5 @@
 import pygame
+import pickle
 
 from .menu_button import Button_Menu
 from .camera import Camera
@@ -25,17 +26,28 @@ class Carriere:
         self.zoom = Zoom()
         self.zoom.update(0)
 
+        self.buttontestsave = Button_Menu(self.controleur.screen, 0, 0, "Enregistrer")
+
     def draw_main_components(self):
         self.controleur.screen.fill((0, 0, 0))
         if self.zoom.should_scale:
             self.current_surface = pygame.transform.scale(self.basic_surface,(self.basic_surface_size[0]*self.zoom.multiplier, self.basic_surface_size[1]*self.zoom.multiplier) )
             self.zoom.should_scale = False
-            
+        
         self.controleur.screen.blit(self.current_surface, (self.camera.scroll.x, self.camera.scroll.y))
+        self.buttontestsave.draw()
 
     def events(self, event):
         if event.type == pygame.MOUSEWHEEL:
                 self.zoom.update(event.y)
+        if self.buttontestsave.check_button():
+            self.Save_game()
+
+    def Save_game(self):
+        object = self.controleur.metier
+        filename = "test.sav"
+        filehandler = open(filename, 'wb') 
+        pickle.dump(object, filehandler)
 
     def reload_board(self):
         self.informations_tiles = self.controleur.get_board()

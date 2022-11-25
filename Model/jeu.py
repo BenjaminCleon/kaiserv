@@ -1,5 +1,3 @@
-from calendar import Calendar
-from datetime import datetime
 from .monde import Monde
 from .dateKaiser import DateKaiser
 
@@ -9,11 +7,10 @@ BEGIN_DAY   = 1
 
 # classe passerelle entre controleur et métier
 class Jeu:
-    def __init__(self, controleur):
-        self.controleur = controleur
-        self.width, self.height = self.controleur.screen.get_size()
+    def __init__(self, controleur, size_tile):
+        self.width, self.height = controleur.screen.get_size()
         # plateau de jeu
-        self.monde = Monde(self.controleur)
+        self.monde = Monde(size_tile, controleur.screen.get_size())
         # date dans le jeu
         self.date = DateKaiser(BEGIN_YEAR,BEGIN_MONTH,BEGIN_DAY)
 

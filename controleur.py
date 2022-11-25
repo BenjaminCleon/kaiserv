@@ -58,6 +58,6 @@ class Controleur:
         return self.metier.get_board()
 
     def create_new_game(self):
-        self.metier = Jeu(self)
+        self.metier = Jeu(self, self.TILE_SIZE)
 
 Controleur()
