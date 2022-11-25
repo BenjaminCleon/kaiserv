@@ -1,5 +1,4 @@
 from .monde import Monde
-from .dateKaiser import DateKaiser
 
 BEGIN_YEAR  = -350
 BEGIN_MONTH = 1
@@ -11,8 +10,6 @@ class Jeu:
         self.width, self.height = controleur.screen.get_size()
         # plateau de jeu
         self.monde = Monde(size_tile, controleur.screen.get_size())
-        # date dans le jeu
-        self.date = DateKaiser(BEGIN_YEAR,BEGIN_MONTH,BEGIN_DAY)
 
     def update(self):
         pass

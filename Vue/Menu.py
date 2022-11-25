@@ -4,6 +4,7 @@ from Vue.menu_settings import *
 from file_reader import reader_bmp_map
 import pygame as pg
 import sys
+import pickle
 
 class Menu():
 
@@ -45,9 +46,10 @@ class Menu():
             self.controleur.play()
 
         if self.Load_Saved_Game.check_button():
-            print("loaaaaddddddddddd")
-            """self.load = True
-            run = False"""
+            self.controleur.metier = pickle.load(open("test.sav", 'rb'))
+            self.controleur.ihm.init_sprite()
+            print(self.controleur.metier.monde.board[0][0]["building"].name)
+            self.controleur.play()
 
         if self.Exit.check_button():
             run = False
