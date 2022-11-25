@@ -1,6 +1,7 @@
 """ Menu screen"""
 from Vue.menu_button import *
 from Vue.menu_settings import *
+from file_reader import reader_bmp_map
 import pygame as pg
 import sys
 
@@ -38,6 +39,9 @@ class Menu():
             
     def events(self):
         if self.Start_new_career.check_button():
+            self.controleur.create_new_game()
+            self.controleur.metier.init_board(reader_bmp_map(1, self.controleur))
+            self.controleur.ihm.init_sprite()
             self.controleur.play()
 
         if self.Load_Saved_Game.check_button():
