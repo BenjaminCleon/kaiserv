@@ -1,9 +1,5 @@
 from .monde import Monde
 
-BEGIN_YEAR  = -350
-BEGIN_MONTH = 1
-BEGIN_DAY   = 1
-
 # classe passerelle entre controleur et métier
 class Jeu:
     def __init__(self, controleur, size_tile):

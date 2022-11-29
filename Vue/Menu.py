@@ -47,8 +47,11 @@ class Menu():
 
         if self.Load_Saved_Game.check_button():
             self.controleur.metier = pickle.load(open("test.sav", 'rb'))
+            # fixe la taille du plateau de jeu
+            self.controleur.grid_height  = len(self.controleur.metier.monde.board)
+            self.controleur.grid_width = len(self.controleur.metier.monde.board[0])
+
             self.controleur.ihm.init_sprite()
-            print(self.controleur.metier.monde.board[0][0]["building"].name)
             self.controleur.play()
 
         if self.Exit.check_button():
