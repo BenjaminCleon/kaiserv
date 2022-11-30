@@ -72,7 +72,7 @@ class Monde:
         return dictionnaire
 
     def define_matrix_for_path_finding(self):
-        return [self.board[i][j]["building"].get_canbewalkthrough_into_integer() for i in range(0,len(self.board)) for j in range(0, len(self.board[0]))]
+        return [[self.board[i][j]["building"].get_canbewalkthrough_into_integer() for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
             
     def check_if_construction_possible_on_grid(self,grid):
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
