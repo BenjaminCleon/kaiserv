@@ -59,5 +59,8 @@ class Controleur:
 
     def create_new_game(self):
         self.metier = Jeu(self, self.TILE_SIZE)
+    
+    def find_path(self,spawn,grid):
+        return astar(self.metier.monde.define_matrix_for_path_finding(),spawn,grid)
 
 Controleur()
