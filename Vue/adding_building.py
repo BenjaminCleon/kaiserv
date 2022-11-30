@@ -1,4 +1,5 @@
 import pygame
+from Model import astar
 
 from .selectionneur_zone import SelectionneurZone
 
@@ -16,6 +17,7 @@ class Adding_Building(SelectionneurZone):
                 if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
                     self.carriere.controleur.check_if_construction_possible_on_grid(grid):
                         self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
+                        print(self.carriere.controleur.find_path((39,20),grid))
 
             self.is_progress = False
             self.carriere.reload_board()
