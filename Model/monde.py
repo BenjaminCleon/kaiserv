@@ -77,8 +77,8 @@ class Monde:
     def check_if_construction_possible_on_grid(self,grid):
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
 
-    def check_if_clear_possible_on_grid(self,grid):
-        return self.board[grid[0]][grid[1]]["building"].can_constructible_over
+    def check_if_clear_possible_on_grid(self, grid):
+        return self.board[grid[0]][grid[1]]["building"].can_be_erase
 
     def craft_building(self, infos_building):
         return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])

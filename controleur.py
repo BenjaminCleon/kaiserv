@@ -51,8 +51,8 @@ class Controleur:
     def add_building_on_point(self, grid_pos, name):
         self.metier.add_building_on_point(grid_pos, name)
 
-    def clear(self, grid_pos, name):
-        self.metier.clear(grid_pos, name)
+    def clear(self, grid_pos):
+        self.metier.clear(grid_pos)
 
     def get_board(self):
         return self.metier.get_board()
