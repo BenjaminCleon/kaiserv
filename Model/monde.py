@@ -52,30 +52,27 @@ class Monde:
 
     def get_information_for_each_tile(self):
         dictionnaire = {
-            'herbe'                         : ['herbe'                         , False, True , 1],
-            'arbre'                         : ['arbre'                         , True , False, 1],
-            'eau'                           : ['eau'                           , False, False, 1],
-            'eau_haut'                      : ['eau_haut'                      , False, False, 1],
-            'eau_bas'                       : ['eau_bas'                       , False, False, 1],
-            'eau_droite'                    : ['eau_droite'                    , False, False, 1],
-            'eau_gauche'                    : ['eau_gauche'                    , False, False, 1],
-            'eau_coin_haut_gauche'          : ['eau_coin_haut_gauche'          , False, False, 1],
-            'eau_coin_haut_droite'          : ['eau_coin_haut_droite'          , False, False, 1],
-            'eau_coin_bas_droite'           : ['eau_coin_bas_droite'           , False, False, 1],
-            'eau_coin_bas_gauche'           : ['eau_coin_bas_gauche'           , False, False, 1],
-            'eau_coin_bas_droite_interieur' : ['eau_coin_bas_droite_interieur' , False, False, 1],
-            'eau_coin_bas_gauche_interieur' : ['eau_coin_bas_gauche_interieur' , False, False, 1],
-            'eau_coin_haut_gauche_interieur': ['eau_coin_haut_gauche_interieur', False, False, 1],
-            'eau_coin_haut_droite_interieur': ['eau_coin_haut_droite_interieur', False, False, 1]
+            'herbe'                         : ['herbe'                         , False, True , True , 1],
+            'arbre'                         : ['arbre'                         , True , False, False, 1],
+            'eau'                           : ['eau'                           , False, False, False, 1],
+            'eau_haut'                      : ['eau_haut'                      , False, False, False, 1],
+            'eau_bas'                       : ['eau_bas'                       , False, False, False, 1],
+            'eau_droite'                    : ['eau_droite'                    , False, False, False, 1],
+            'eau_gauche'                    : ['eau_gauche'                    , False, False, False, 1],
+            'eau_coin_haut_gauche'          : ['eau_coin_haut_gauche'          , False, False, False, 1],
+            'eau_coin_haut_droite'          : ['eau_coin_haut_droite'          , False, False, False, 1],
+            'eau_coin_bas_droite'           : ['eau_coin_bas_droite'           , False, False, False, 1],
+            'eau_coin_bas_gauche'           : ['eau_coin_bas_gauche'           , False, False, False, 1],
+            'eau_coin_bas_droite_interieur' : ['eau_coin_bas_droite_interieur' , False, False, False, 1],
+            'eau_coin_bas_gauche_interieur' : ['eau_coin_bas_gauche_interieur' , False, False, False, 1],
+            'eau_coin_haut_gauche_interieur': ['eau_coin_haut_gauche_interieur', False, False, False, 1],
+            'eau_coin_haut_droite_interieur': ['eau_coin_haut_droite_interieur', False, False, False, 1]
         }
 
         return dictionnaire
 
     def define_matrix_for_path_finding(self):
-        matrix = []
-        for i in range(0,len(self.information_for_each_tile)):
-            for j in range(0, len(self.information_for_each_tile[0])):
-                pass
+        return [self.board[i][j]["building"].get_canbewalkthrough_into_integer() for i in range(0,len(self.board)) for j in range(0, len(self.board[0]))]
             
     def check_if_construction_possible_on_grid(self,grid):
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
@@ -84,7 +81,7 @@ class Monde:
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
 
     def craft_building(self, infos_building):
-        return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3])
+        return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
 
     def add_building_on_point(self, grid_pos, name):
         infos_building = self.information_for_each_tile[name]

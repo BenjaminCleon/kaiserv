@@ -51,7 +51,6 @@ class Carriere:
 
     def reload_board(self):
         self.informations_tiles = self.controleur.get_board()
-        print(self.controleur.TILE_SIZE)
         self.basic_surface_size = (self.controleur.TILE_SIZE*self.controleur.grid_width*2,
                                    self.controleur.TILE_SIZE*self.controleur.grid_height*2+self.controleur.TILE_SIZE)
         self.basic_surface = pygame.Surface(self.basic_surface_size)
