@@ -1,5 +1,4 @@
 import pygame
-from Model import astar
 
 from .selectionneur_zone import SelectionneurZone
 
