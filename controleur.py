@@ -3,6 +3,7 @@ import pygame
 from file_reader import set_tile_size
 from Model.jeu import Jeu
 from Vue.IHM   import IHM
+from Model.pathfinding import astar
 
 class Controleur:
     def __init__(self):
