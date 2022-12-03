@@ -4,6 +4,7 @@ from file_reader import set_tile_size
 from Model.jeu import Jeu
 from Vue.IHM   import IHM
 from Model.pathfinding import astar
+import numpy 
 
 class Controleur:
     def __init__(self):
@@ -62,6 +63,6 @@ class Controleur:
         self.metier = Jeu(self, self.TILE_SIZE)
     
     def find_path(self,spawn,end):
-        return astar(self.metier.monde.define_matrix_for_path_finding(),spawn,end)
+        return astar(numpy.array(self.metier.monde.define_matrix_for_path_finding()),spawn,end)
 
 Controleur()
