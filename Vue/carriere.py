@@ -91,13 +91,15 @@ class Carriere:
             'eau_coin_bas_droite_interieur' : pygame.image.load("assets/upscale_land/Land1a_00173.png").convert_alpha(),
             'eau_coin_bas_gauche_interieur' : pygame.image.load("assets/upscale_land/Land1a_00170.png").convert_alpha(),
             'eau_coin_haut_gauche_interieur': pygame.image.load("assets/upscale_land/Land1a_00171.png").convert_alpha(),
-            'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha()
+            'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha(),
+            'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha()
         }
         return dictionnaire
 
     def get_dictionnary_by_path(self):
         dictionnaire = {
             "assets/upscale_land/Land1a_00115.png": 'herbe'                         ,
+            "assets/upscale_house/Housng1a_00045.png": "panneau"                    ,
             "assets/upscale_land/Land1a_00049.png": 'arbre'                         ,
             "assets/upscale_land/Land1a_00120.png": 'eau'                           ,
             "assets/upscale_land/Land1a_00136.png": 'eau_haut'                      ,

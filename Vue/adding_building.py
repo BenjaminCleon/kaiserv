@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 
 from .selectionneur_zone import SelectionneurZone
 
@@ -19,8 +20,8 @@ class Adding_Building(SelectionneurZone):
                         self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
 
             self.is_progress = False
+            
             self.carriere.reload_board()
-
 
     def draw(self):
         SelectionneurZone.draw(self)

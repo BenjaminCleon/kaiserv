@@ -55,10 +55,10 @@ class HUD:
                 elif event.type == pg.MOUSEBUTTONUP and event.button == 1 and self.button_hud_right[button].who_is_visible == "image_click":
                     match button:
                         case "build":
-                            if self.action == None: self.action = Adding_Building(self.carriere, "assets/upscale_land/Land1a_00049.png")
+                            if self.action == None: self.action = Adding_Building(self.carriere, "assets/upscale_house/Housng1a_00045.png")
                             if not self.action.is_progress:
                                 self.action.is_progress = True
-                                image = pg.image.load("assets/upscale_land/Land1a_00049.png")
+                                image = pg.image.load("assets/upscale_house/Housng1a_00045.png")
                                 self.action.initialiser(image)
                         case "clear":
                             print("clear is working !")
