@@ -35,6 +35,20 @@ class Carriere:
             self.zoom.should_scale = False
         
         self.controleur.screen.blit(self.current_surface, (self.camera.scroll.x, self.camera.scroll.y))
+
+        walkers_infos = self.controleur.get_walker_infos()
+        if walkers_infos != None:
+            for walker in walkers_infos:
+                image = self.dictionnaire[walker["name"]]
+                image = pygame.transform.scale(image, (image.get_width()*self.zoom.multiplier, image.get_height()*self.zoom.multiplier))
+                position = self.informations_tiles[walker["grid"][0]][walker["grid"][1]]["position_rendu"]
+                position = ( 
+                    ((position[0]*self.zoom.multiplier + self.current_surface.get_width()/2 + self.camera.scroll.x)),
+                    ((position[1]*self.zoom.multiplier - (image.get_height() - self.controleur.TILE_SIZE*self.zoom.multiplier )+ self.camera.scroll.y))
+                )
+
+                self.controleur.screen.blit(image, position)
+
         self.buttontestsave.draw()
 
     def events(self, event):
@@ -92,7 +106,8 @@ class Carriere:
             'eau_coin_bas_gauche_interieur' : pygame.image.load("assets/upscale_land/Land1a_00170.png").convert_alpha(),
             'eau_coin_haut_gauche_interieur': pygame.image.load("assets/upscale_land/Land1a_00171.png").convert_alpha(),
             'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha(),
-            'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha()
+            'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha(),
+            'citizen'                       : pygame.image.load("assets/upscale_citizen/Citizen05_00001.png").convert_alpha()
         }
         return dictionnaire
 

@@ -53,7 +53,7 @@ class Monde:
     def get_information_for_each_tile(self):
         dictionnaire = {
             'herbe'                         : ['herbe'                         , False, True , True , 1],
-            'panneau'                       : ['panneau'                       , False, True , False, 1],
+            'panneau'                       : ['panneau'                       , False, True , True , 1],
             'arbre'                         : ['arbre'                         , True , False, False, 1],
             'eau'                           : ['eau'                           , False, False, False, 1],
             'eau_haut'                      : ['eau_haut'                      , False, False, False, 1],

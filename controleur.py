@@ -3,7 +3,7 @@ import pygame
 from file_reader import set_tile_size
 from Model.jeu import Jeu
 from Vue.IHM   import IHM
-from Model.pathfinding import astar
+from Model.pathfinding import short_path
 import numpy 
 
 class Controleur:
@@ -38,7 +38,7 @@ class Controleur:
             while self.playing:
                 self.clock.tick(60)
                 self.ihm.events()
-                #self.metier.update()
+                self.metier.update()
                 self.ihm.update()
                 self.ihm.draw()
 
@@ -63,6 +63,19 @@ class Controleur:
         self.metier = Jeu(self, self.TILE_SIZE)
     
     def find_path(self,spawn,end):
-        return astar(numpy.array(self.metier.monde.define_matrix_for_path_finding()),spawn,end)
+        return short_path(numpy.array(self.metier.monde.define_matrix_for_path_finding()),spawn,end)
+
+    def walker_creation(self,depart,destination):
+        self.metier.walker_creation(depart,destination)
+
+    def get_walker_infos(self):
+        citizens = []
+        for walker in self.metier.walkerlist:
+            citizens.append({
+                "grid": walker.actualPosition,
+                "name": walker.name
+            })
+
+        return citizens
 
 Controleur()

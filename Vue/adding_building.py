@@ -14,10 +14,10 @@ class Adding_Building(SelectionneurZone):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: self.can_thinking = True
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.can_thinking:
             for grid in self.grid_to_draw:
-                # voir si asynchrone
                 if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
                     self.carriere.controleur.check_if_construction_possible_on_grid(grid) and grid != (20,39):
                         self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
+                        self.carriere.controleur.walker_creation((20,39),grid)
 
             self.is_progress = False
             
