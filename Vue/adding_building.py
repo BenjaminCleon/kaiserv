@@ -22,7 +22,6 @@ class Adding_Building(SelectionneurZone):
             self.carriere.reload_board()
 
 
-
     def draw(self):
         SelectionneurZone.draw(self)
         if self.is_progress:
