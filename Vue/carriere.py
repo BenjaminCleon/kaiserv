@@ -114,7 +114,25 @@ class Carriere:
             'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha(),
             'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha(),
             'citizen'                       : pygame.image.load("assets/upscale_citizen/Citizen05_00001.png").convert_alpha(),
-            'tente'                         : pygame.image.load("assets/upscale_house/Housng1a_00002.png").convert_alpha()
+            'tente'                         : pygame.image.load("assets/upscale_house/Housng1a_00002.png").convert_alpha(),
+            'route droite'                  : pygame.image.load('assets/upscale_road/Land2a_00093.png').convert_alpha(),
+            'route verticale'               : pygame.image.load('assets/upscale_road/Land2a_00094.png').convert_alpha(),
+            'route droitebis'               : pygame.image.load('assets/upscale_road/Land2a_00095.png').convert_alpha(),
+            'route horizontale'             : pygame.image.load('assets/upscale_road/Land2a_00096.png').convert_alpha(),
+            'virage vers le bas'            : pygame.image.load('assets/upscale_road/Land2a_00097.png').convert_alpha(),
+            'Virage gauche vers droite'     : pygame.image.load('assets/upscale_road/Land2a_00098.png').convert_alpha(),
+            'Virage gauche vers le bas'     : pygame.image.load('assets/upscale_road/Land2a_00099.png').convert_alpha(),
+            'Virage gauche vers droite vers le haut': pygame.image.load('assets/upscale_road/Land2a_00100.png').convert_alpha(),
+            'Debut de route'   : pygame.image.load('assets/upscale_road/Land2a_00101.png').convert_alpha(),
+            'Debut de routebis': pygame.image.load('assets/upscale_road/Land2a_00102.png').convert_alpha(),
+            'Fin de route'     : pygame.image.load('assets/upscale_road/Land2a_00103.png').convert_alpha(),
+            'Fin de routebis'  : pygame.image.load('assets/upscale_road/Land2a_00104.png').convert_alpha(),
+            'Fin de routebis2' : pygame.image.load('assets/upscale_road/Land2a_00105.png').convert_alpha(),
+            'Début intersection deux voix'   : pygame.image.load('assets/upscale_road/Land2a_00106.png').convert_alpha(),
+            'Debut intersection deux voixbis': pygame.image.load('assets/upscale_road/Land2a_00107.png').convert_alpha(),
+            'Intersection'   : pygame.image.load('assets/upscale_road/Land2a_00108.png').convert_alpha(),
+            'Intersectionbis': pygame.image.load('assets/upscale_road/Land2a_00109.png').convert_alpha(),
+            'Carrefour'      : pygame.image.load('assets/upscale_road/Land2a_00110.png').convert_alpha()
         }
         return dictionnaire
 
@@ -136,7 +154,25 @@ class Carriere:
             "assets/upscale_land/Land1a_00170.png": 'eau_coin_bas_gauche_interieur' ,
             "assets/upscale_land/Land1a_00171.png": 'eau_coin_haut_gauche_interieur',
             'assets/upscale_land/Land1a_00172.png': 'eau_coin_haut_droite_interieur',
-            "assets/upscale_house/Housng1a_00002.png": 'tente'
+            "assets/upscale_house/Housng1a_00002.png": 'tente',
+            "assets/upscale_road/Land2a_00093.png" : 'route droite',
+            "assets/upscale_road/Land2a_00094.png" : 'route verticale',
+            "assets/upscale_road/Land2a_00095.png" : 'route droitebis',
+            "assets/upscale_road/Land2a_00096.png" : 'route horizontale',
+            "assets/upscale_road/Land2a_00097.png" : 'virage vers le bas',
+            "assets/upscale_road/Land2a_00098.png" : 'Virage gauche vers droite',
+            "assets/upscale_road/Land2a_00099.png" : 'Virage gauche vers le bas',
+            "assets/upscale_road/Land2a_00100.png" : 'Virage gauche vers droite vers le haut',
+            "assets/upscale_road/Land2a_00101.png" : 'Debut de route',
+            "assets/upscale_road/Land2a_00102.png" : 'Debut de routebis',
+            "assets/upscale_road/Land2a_00103.png" : 'Fin de route',
+            "assets/upscale_road/Land2a_00104.png" : 'Fin de routebis',
+            "assets/upscale_road/Land2a_00105.png" : 'Fin de routebis2',
+            "assets/upscale_road/Land2a_00106.png" : 'Début intersection deux voix',
+            "assets/upscale_road/Land2a_00107.png" : 'Debut intersection deux voixbis',
+            "assets/upscale_road/Land2a_00108.png" : 'Intersection',
+            "assets/upscale_road/Land2a_00109.png" : 'Intersectionbis',
+            "assets/upscale_road/Land2a_00110.png" : 'Carrefour'
         }
         return dictionnaire
 

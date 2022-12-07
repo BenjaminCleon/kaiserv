@@ -3,6 +3,7 @@ import pygame as pg
 from .bouton_hud import Button_HUD
 from .adding_building import Adding_Building
 from .clear import Clear
+from .addingRoad import Adding_Road
 
 class HUD:
     def __init__(self, screen, carriere):
@@ -29,7 +30,7 @@ class HUD:
         size_hud_top = (self.hud_top.get_width()*self.longueur/REFERENCE_SIZE_X, self.hud_top.get_height()*self.hauteur/REFERENCE_SIZE_Y)
         self.hud_top =  pg.transform.scale(self.hud_top, size_hud_top)
 
-        actions = ["build", "clear", "test_clear" "road", "water", "", "", "", "", ""]
+        actions = ["build", "clear", "road", "water", "", "", "", "", "", ""]
         self.button_hud_right = {}
         for i in range(3):
             for j in range(3):
@@ -69,7 +70,11 @@ class HUD:
                                 self.action.initialiser(image)
                             print("dod s!t ")
                         case "road":
-                            pass
+                            if self.action == None: self.action = Adding_Road(self.carriere,"assets/upscale_road/Land2a_00094.png")
+                            if not self.action.is_progress:
+                                self.action.is_progress = True
+                                image = pg.image.load("assets/upscale_road/Land2a_00094.png")
+                                self.action.initialiser(image)
                         case "water":
                             pass
                 elif self.button_hud_right[button].who_is_visible != "image_click":

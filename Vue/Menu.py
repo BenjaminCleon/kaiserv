@@ -41,7 +41,7 @@ class Menu():
     def events(self):
         if self.Start_new_career.check_button():
             self.controleur.create_new_game()
-            self.controleur.metier.init_board(reader_bmp_map(1, self.controleur))
+            self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
             self.controleur.ihm.init_sprite()
             self.controleur.play()
 

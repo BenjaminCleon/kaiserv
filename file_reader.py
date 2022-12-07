@@ -27,30 +27,6 @@ def get_name_sprite(rgb_code):
             return "arbre"
         case ((0,0,255)):
             return "eau"
-        case ((0,0,100)):
-            return "eau_haut"
-        case ((0,0,120)):
-            return "eau_bas"
-        case ((0,0,140)):
-            return "eau_droite"
-        case ((0,0,160)):
-            return "eau_gauche"
-        case ((0,0,180)):
-            return "eau_coin_haut_gauche"
-        case ((0,0,190)):
-            return "eau_coin_haut_gauche_interieur"
-        case ((0,0,200)):
-            return "eau_coin_haut_droite"
-        case ((0,0,210)):
-            return "eau_coin_haut_droite_interieur"
-        case ((0,0,220)):
-            return "eau_coin_bas_droite"
-        case ((0,0,230)):
-            return "eau_coin_bas_droite_interieur"
-        case ((0,0,240)):
-            return "eau_coin_bas_gauche"
-        case ((0,0,250)):
-            return "eau_coin_bas_gauche_interieur"
 
     print("Code RGB {} inconnu, poursuite du chargement")
     return None
