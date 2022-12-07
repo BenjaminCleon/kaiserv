@@ -45,7 +45,7 @@ class Monde:
 
     # initialise l'entiéreté du plateau
     def init_board(self, file_names):
-        self.manage_for_water(file_names)
+        file_names = self.manage_for_water(file_names)
 
         for num_lig in range(len(file_names)):
             self.board.append([])
@@ -54,29 +54,49 @@ class Monde:
                 self.board[num_lig].append(tile_board)
 
     def manage_for_water(self, file_names):
-        pass
-        """
-        binary_traitement = []
+        file_names_return = []
         for num_lig  in range(len(file_names)):
-            binary_traitement.append([])
+            file_names_return.append([])
             for num_col in range(len(file_names[num_lig])):
-                binary_traitement[num_lig].append([])
-                for coord in [(-1,0),(0,1),(1,0),(0,-1)]:
-                    #admettons que nous avons sommes avec i = 8 et j = 7, nous etudierons pour déterminer les routes les cases
-                    #                     file_names[7][7]
-                    # file_names[8][6] file_names[8][7] file_names[8][8]
-                    #                     file_names[9][7]
-                    #
-                    if (num_lig+coord[0])>=0 and (num_lig+coord[0])<len(file_names) and (num_col+coord[1])>=0 and (num_col+coord[1])<len(file_names[num_lig]) and file_names[num_lig+coord[0]][num_col+coord[1]] == 'eau':
-                        binary_traitement[num_lig][num_col].append(1)
-                    else:
-                        binary_traitement[num_lig][num_col].append(0)
+                if file_names[num_lig][num_col] == "eau":
+                    binary_traitement = []
+                    for coord in [(-1,0),(0,1),(1,0),(0,-1)]:
+                        #admettons que nous avons sommes avec i = 8 et j = 7, nous etudierons pour déterminer les routes les cases
+                        #                     file_names[7][7]
+                        # file_names[8][6] file_names[8][7] file_names[8][8]
+                        #                     file_names[9][7]
+                        #
+                        if (num_lig+coord[0])>=0 and (num_lig+coord[0])<len(file_names) and (num_col+coord[1])>=0 and (num_col+coord[1])<len(file_names[num_lig]) and file_names[num_lig+coord[0]][num_col+coord[1]] == 'eau':
+                            binary_traitement.append(1)
+                        else:
+                            binary_traitement.append(0)
 
-                sum = 0
-                for binary_value, i in zip(binary_traitement[num_lig][num_col], range(3,-1)):
-                    print(binary_traitement[num_lig][num_col])
-                    sum = sum + binary_value*math.pow(2, i)
-                """
+                    sum = 0
+                    for binary_value, i in zip(binary_traitement, range(3,-1, -1)):
+                        sum = int(sum + binary_value*math.pow(2, i))
+                    
+                    match sum:
+                        case 15: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(1,0),(0,-1)
+                        case 14: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(1,0)
+                        case 13: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(0,-1)
+                        case 12: file_names_return[num_lig].append("eau") # (-1,0),(0,1)
+                        case 11: file_names_return[num_lig].append("eau") # (-1,0)(1,0),(0,-1)
+                        case 10: file_names_return[num_lig].append("eau_isole_verticale") # (-1,0),(1,0)
+                        case  9: file_names_return[num_lig].append("eau") # (-1,0),(0,-1)
+                        case  8: file_names_return[num_lig].append("eau_fin_haut") # (-1,0)
+                        case  7: file_names_return[num_lig].append("eau") # (0,1),(1,0),(0,-1)
+                        case  6: file_names_return[num_lig].append("eau") # (0,1),(1,0)
+                        case  5: file_names_return[num_lig].append("eau_isole_horizontale") # (0,1),(0,-1)
+                        case  4: file_names_return[num_lig].append("eau_fin_droite") # (0,1)
+                        case  3: file_names_return[num_lig].append("eau") # (1,0),(0,-1)
+                        case  2: file_names_return[num_lig].append("eau_fin_bas") # (1,0)
+                        case  1: file_names_return[num_lig].append("eau_fin_gauche") # (0,-1)
+                        case  0: file_names_return[num_lig].append("eau_isole")
+                else:
+                    file_names_return[num_lig].append("herbe")
+
+        return file_names_return
+                
 
 
     def get_information_for_each_tile(self):
@@ -98,6 +118,13 @@ class Monde:
             'eau_coin_bas_gauche_interieur'          : ['eau_coin_bas_gauche_interieur'         , False, False, False, 1],
             'eau_coin_haut_gauche_interieur'         : ['eau_coin_haut_gauche_interieur'        , False, False, False, 1],
             'eau_coin_haut_droite_interieur'         : ['eau_coin_haut_droite_interieur'        , False, False, False, 1],
+            'eau_isole'                              : ['eau_isole'                             , False, False, False, 1],
+            'eau_isole_horizontale'                  : ['eau_isole_horizontale'                 , False, False, False, 1],
+            'eau_isole_verticale'                    : ['eau_isole_verticale'                   , False, False, False, 1],
+            'eau_fin_gauche'                         : ['eau_fin_gauche'                        , False, False, False, 1],
+            'eau_fin_droite'                         : ['eau_fin_droite'                        , False, False, False, 1],
+            'eau_fin_bas'                            : ['eau_fin_bas'                           , False, False, False, 1],
+            'eau_fin_haut'                           : ['eau_fin_haut'                          , False, False, False, 1],
             'route droite'                           : ['route droite'                          , False,  True,  True, 1],
             'route verticale'                        : ['route verticale'                       , False,  True,  True, 1],
             'route droitebis'                        : ['route droitebis'                       , False,  True,  True, 1],

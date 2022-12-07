@@ -5,8 +5,9 @@ import heapq
 def heuristic(a, b):
     return np.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
 
-def astar(array, start, goal):
-    neighbors = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+def astar(array, start, goal, should_diagonale):
+    if should_diagonale: neighbors = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+    else               : neighbors = [(0,1),(0,-1),(1,0),(-1,0)]
     close_set = set()
     came_from = {}
     gscore = {start:0}
@@ -47,8 +48,8 @@ def astar(array, start, goal):
 
     return False
 
-def short_path(maze, start, end):
-    path = astar(maze, end, start)
+def short_path(maze, start, end, should_diagonale=True):
+    path = astar(maze, end, start, should_diagonale)
     if path != False: path.append(end)
     return path
 
