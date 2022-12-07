@@ -54,6 +54,7 @@ class Monde:
         dictionnaire = {
             'herbe'                         : ['herbe'                         , False, True , True , 1],
             'panneau'                       : ['panneau'                       , False, True , True , 1],
+            'tente'                         : ['tente'                         , True , False, False, 1],
             'arbre'                         : ['arbre'                         , True , False, False, 1],
             'eau'                           : ['eau'                           , False, False, False, 1],
             'eau_haut'                      : ['eau_haut'                      , False, False, False, 1],

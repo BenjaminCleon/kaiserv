@@ -71,11 +71,11 @@ class Controleur:
     def get_walker_infos(self):
         citizens = []
         for walker in self.metier.walkerlist:
-            citizens.append({
-                "grid": walker.actualPosition,
-                "name": walker.name
-            })
+            citizens.append(walker)
 
         return citizens
+
+    def should_refresh_from_model(self):
+        return self.metier.should_refresh
 
 Controleur()
