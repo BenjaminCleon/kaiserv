@@ -16,6 +16,7 @@ class Jeu:
     def check_if_clear_possible_on_grid(self, grid):
         return self.monde.check_if_clear_possible_on_grid(grid)
 
+
     def clear(self,grid):
         if self.check_if_clear_possible_on_grid(grid):
             self.monde.add_building_on_point(grid, 'herbe')

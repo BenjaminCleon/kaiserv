@@ -13,6 +13,7 @@ class Controleur:
         self.playing = False
         running = True
 
+
         # initialisation des valeurs de paramètre
         self.TILE_SIZE = set_tile_size("./settings.txt")
 

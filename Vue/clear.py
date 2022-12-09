@@ -9,6 +9,7 @@ class Clear(SelectionneurZone):
         self.path = path
         self.can_thinking = False
 
+
     def events(self, event):
         SelectionneurZone.events(self, event)
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: self.can_thinking = True

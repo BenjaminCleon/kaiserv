@@ -61,6 +61,7 @@ class HUD:
                                 image = pg.image.load("assets/upscale_land/Land1a_00049.png")
                                 self.action.initialiser(image)
                         case "clear":
+                            
                             if self.action == None: self.action = Clear(self.carriere, "assets/upscale_land/red_image.png")
                             if not self.action.is_progress:
                                 self.action.is_progress = True
