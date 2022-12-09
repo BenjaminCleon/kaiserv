@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from file_reader import reader_bmp_map
-from Vue.Buttons_settings import *
+from Vue.Buttons_settings_pause import *
 
 
 class Pause_menu:
@@ -10,30 +10,45 @@ class Pause_menu:
         self.controleur = controleur
         self.displayed = False
         self.screen = screen
-        self.x = screen.get_width()/2 #récupère longueur
-        self.y = screen.get_height()/2 #récupère hauteur
+        self.center_x = screen.get_width()/2 
+        self.center_y = screen.get_height()/2 
         self.font = pg.font.SysFont('Constantia', 75)
         self.font2 = pg.font.SysFont('Constantia', 50)
         self.space = 60
+        self.menu_principale = False
         self.new_game = False
         self.save = False
-        self.menu_principale = False
         self.quitter = False
-    
 
-        self.new_game = Button_Menu_paused(self.screen, self.x, self.y  - (self.space), 'Nouvelle partie')
-        self.save = Button_Menu_paused(self.screen, self.x, self.y  - (2*self.space), 'Sauvegarder')
-        self.menu_principale = Button_Menu_paused(self.screen, self.x, self.y  - (3*self.space), 'Menu principale')
-        self.quitter = Button_Menu_paused(self.screen, self.x, self.y  - (4*self.space), 'Quitter le jeu')
+        #chargement image menu
+        self.fond_menu = pg.image.load("./assets/background_pause_menu.jpg").convert_alpha()
+
+        #Récupération mi-dimension image 
+        self.longueur_centre_image_menu = self.fond_menu.get_width()//2
+        self.largeur_centre_image_menu = self.fond_menu.get_height()//2
+
+        #mise à l'échelle de l'image de fond du menu
+        self.new_longueur_centre_image_menu = self.longueur_centre_image_menu/7
+        self.new_largeur_centre_image_menu = self.largeur_centre_image_menu/4
+        self.fond_menu = pg.transform.scale(self.fond_menu, (self.new_longueur_centre_image_menu, self.new_largeur_centre_image_menu))
+    
+        #création bouttons
+        self.menu_principale = Button_Menu_paused(self.screen, self.center_x, self.center_y - (2*self.space), 'Menu principale')
+        self.new_game = Button_Menu_paused(self.screen, self.center_x, self.center_y - (1*self.space), 'Nouvelle partie')
+        self.save = Button_Menu_paused(self.screen, self.center_x, self.center_y, 'Sauvegarder')
+        self.quitter = Button_Menu_paused(self.screen, self.center_x, self.center_y  - (-1*self.space), 'Quitter le jeu')
             
 
     def events(self):
         if self.displayed :
+
+            # revenir au menu principale 
             if self.menu_principale.check_button():
                 self.controleur.playing = False
                 self.controleur.paused = False 
 
-            if self.new_game.check_button():#
+            #
+            if self.new_game.check_button():
                 self.controleur.create_new_game()
                 self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
                 self.controleur.ihm.init_sprite()
@@ -46,12 +61,13 @@ class Pause_menu:
                 run = False
                 sys.exit()
 
-
+    # affichage menu pause
     def draw(self):
         if self.displayed :
 
-            pg.draw.rect(self.screen, (255, 255, 255),((self.x),(self.y),200,400))
-        
+            self.screen.blit(self.fond_menu,(self.center_x - (self.new_longueur_centre_image_menu*0.42) , self.center_y - (self.new_longueur_centre_image_menu*0.7)))
+            self.screen.blit(self.font.render(" Pause ", True, (0, 0, 0)),(self.center_x*0.92, self.center_y*0.60))
+            
             self.new_game.draw()
             self.save.draw()
             self.menu_principale.draw()
