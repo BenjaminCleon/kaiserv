@@ -70,7 +70,7 @@ class HUD:
                                 self.action.initialiser(image)
                             print("dod s!t ")
                         case "road":
-                            if self.action == None: self.action = Adding_Road(self.carriere,"assets/upscale_road/Land2a_00094.png")
+                            if self.action == None: self.action = Adding_Road(self.carriere)
                             if not self.action.is_progress:
                                 self.action.is_progress = True
                                 image = pg.image.load("assets/upscale_road/Land2a_00094.png")

@@ -60,40 +60,77 @@ class Monde:
             for num_col in range(len(file_names[num_lig])):
                 if file_names[num_lig][num_col] == "eau":
                     binary_traitement = []
-                    for coord in [(-1,0),(0,1),(1,0),(0,-1)]:
-                        #admettons que nous avons sommes avec i = 8 et j = 7, nous etudierons pour déterminer les routes les cases
-                        #                     file_names[7][7]
-                        # file_names[8][6] file_names[8][7] file_names[8][8]
-                        #                     file_names[9][7]
-                        #
+                    for coord in [(0,-1),(-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1)]:
+                        """
+                        (-1,-1)(-1,0)(-1,1)
+                        (0,-1 )   X  (0,1)
+                        (1,-1 )(1,0 )(1,1)
+                        """
                         if (num_lig+coord[0])>=0 and (num_lig+coord[0])<len(file_names) and (num_col+coord[1])>=0 and (num_col+coord[1])<len(file_names[num_lig]) and file_names[num_lig+coord[0]][num_col+coord[1]] == 'eau':
                             binary_traitement.append(1)
                         else:
                             binary_traitement.append(0)
 
                     sum = 0
-                    for binary_value, i in zip(binary_traitement, range(3,-1, -1)):
+                    for binary_value, i in zip(binary_traitement, range(7,-1, -1)):
                         sum = int(sum + binary_value*math.pow(2, i))
                     
+                    """
+                    for debug
+                    liste = [255,250,248,249,230,224,240,236,155,177,225,241,206,108,59,198,110,227,243,235,200,185,179,175,140,137,138,130,193,128,50,40,42,98,35,38,190,168,160,251,254,239,162,152,143,159,10,191,27,131,195,184,135,199,136,62,63,58,56,60,120,124,48,39,32,30,114,156,170,201,112,34,24,15,31,14,28,8,2,7,0]
+                    if sum not in liste:
+                        print(binary_traitement, sum)
+                    """
+
+                    tile = "eau"
                     match sum:
-                        case 15: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(1,0),(0,-1)
-                        case 14: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(1,0)
-                        case 13: file_names_return[num_lig].append("eau") # (-1,0),(0,1),(0,-1)
-                        case 12: file_names_return[num_lig].append("eau") # (-1,0),(0,1)
-                        case 11: file_names_return[num_lig].append("eau") # (-1,0)(1,0),(0,-1)
-                        case 10: file_names_return[num_lig].append("eau_isole_verticale") # (-1,0),(1,0)
-                        case  9: file_names_return[num_lig].append("eau") # (-1,0),(0,-1)
-                        case  8: file_names_return[num_lig].append("eau_fin_haut") # (-1,0)
-                        case  7: file_names_return[num_lig].append("eau") # (0,1),(1,0),(0,-1)
-                        case  6: file_names_return[num_lig].append("eau") # (0,1),(1,0)
-                        case  5: file_names_return[num_lig].append("eau_isole_horizontale") # (0,1),(0,-1)
-                        case  4: file_names_return[num_lig].append("eau_fin_droite") # (0,1)
-                        case  3: file_names_return[num_lig].append("eau") # (1,0),(0,-1)
-                        case  2: file_names_return[num_lig].append("eau_fin_bas") # (1,0)
-                        case  1: file_names_return[num_lig].append("eau_fin_gauche") # (0,-1)
-                        case  0: file_names_return[num_lig].append("eau_isole")
+                        case 255: tile = "eau"
+                        case 250: tile = "eau_redirection_droite"
+                        case 248 | 249: tile = "eau_droite"
+                        case 236: tile = "eau_redirection_two_to_gauche_gauche"
+                        case 224 | 240 | 225 | 241 : tile = "eau_coin_bas_droite"
+                        case 227 | 243: tile = "eau_bas"
+                        case 168: tile = "eau_intersection_droite"
+                        case 235: tile = "eau_redirection_bas"
+                        case 110: tile = "eau_redirection_two_to_bas_gauche"
+                        case 230: tile = "eau_redirection_two_to_haut_droite"
+                        case 184 | 185: tile = "eau_redirection_two_to_gauche_droite"
+                        case 160 | 177: tile = "eau_virage_bas_droite"
+                        case 175: tile = "eau_redirection_gauche"
+                        case 206: tile = "eau_redirection_two_to_droite_gauche"
+                        case 155: tile = "eau_redirection_two_to_droite_droite"
+                        case 162: tile = "eau_intersection_bas"
+                        case 179: tile = "eau_redirection_two_to_haut_gauche"
+                        case 193 | 128: tile = "eau_fin_gauche"
+                        case 190: tile = "eau_redirection_haut"
+                        case 251: tile = "eau_coin_bas_droite_interieur"
+                        case 254: tile = "eau_coin_haut_droite_interieur"
+                        case 239: tile = "eau_coin_bas_gauche_interieur"
+                        case 143 | 159: tile = "eau_gauche"
+                        case 59: tile = "eau_redirection_two_to_bas_droite"
+                        case 42: tile = "eau_intersection_haut"
+                        case 40 | 108: tile = "eau_virage_haut_droite"
+                        case 191: tile = "eau_coin_haut_gauche_interieur"
+                        case 131 | 195 | 135 | 199: tile = "eau_coin_bas_gauche"
+                        case 136 | 156 | 201 | 152 | 200 | 140 | 137: tile = "eau_isole_horizontale"
+                        case 62 | 63: tile = "eau_haut"
+                        case 10 | 27: tile = "eau_virage_haut_gauche"
+                        case 138: tile = "eau_intersection_gauche"
+                        case 130 | 198: tile = "eau_virage_bas_gauche"
+                        case  58: tile = 'eau_couloir'
+                        case 170: tile = "eau_intersection"
+                        case  56 | 60 | 120 | 124 : tile = "eau_coin_haut_droite"
+                        case  48 | 32 | 112: tile = "eau_fin_haut"
+                        case  30 | 15 | 31 | 14 : tile = "eau_coin_haut_gauche"
+                        case  34 | 39 | 114 | 35 | 38 | 98 | 50: tile = "eau_isole_verticale"
+                        case  28 | 8 | 24: tile = "eau_fin_droite"
+                        case  2 | 7: tile="eau_fin_bas"
+                        case  0: tile = "eau_isole"
+                        case  _ : tile = "eau"
+
+                    file_names_return[num_lig].append(tile)
                 else:
-                    file_names_return[num_lig].append("herbe")
+                    file_names_return[num_lig].append(file_names[num_lig][num_col])
 
         return file_names_return
                 
@@ -110,6 +147,18 @@ class Monde:
             'eau_bas'                                : ['eau_bas'                               , False, False, False, 1],
             'eau_droite'                             : ['eau_droite'                            , False, False, False, 1],
             'eau_gauche'                             : ['eau_gauche'                            , False, False, False, 1],
+            "eau_redirection_two_to_gauche_droite"   : ['eau_redirection_two_to_gauche_droite'  , False, False, False, 1],
+            "eau_redirection_two_to_gauche_gauche"   : ['eau_redirection_two_to_gauche_gauche'  , False, False, False, 1],
+            "eau_redirection_two_to_droite_gauche"   : ['eau_redirection_two_to_droite_gauche'  , False, False, False, 1],
+            "eau_redirection_two_to_droite_droite"   : ['eau_redirection_two_to_droite_droite'  , False, False, False, 1],
+            'eau_redirection_two_to_haut_gauche'     : ['eau_redirection_two_to_haut_gauche'    , False, False, False, 1],
+            'eau_redirection_two_to_haut_droite'     : ['eau_redirection_two_to_haut_droite'    , False, False, False, 1],
+            'eau_redirection_two_to_bas_gauche'      : ['eau_redirection_two_to_bas_gauche'     , False, False, False, 1],
+            'eau_redirection_two_to_bas_droite'      : ['eau_redirection_two_to_bas_droite'     , False, False, False, 1],
+            'eau_intersection_bas'                   : ['eau_intersection_bas'                  , False, False, False, 1],
+            'eau_intersection_haut'                  : ['eau_intersection_haut'                 , False, False, False, 1],
+            'eau_intersection_gauche'                : ['eau_intersection_gauche'               , False, False, False, 1],
+            'eau_intersection_droite'                : ['eau_intersection_droite'               , False, False, False, 1],
             'eau_coin_haut_gauche'                   : ['eau_coin_haut_gauche'                  , False, False, False, 1],
             'eau_coin_haut_droite'                   : ['eau_coin_haut_droite'                  , False, False, False, 1],
             'eau_coin_bas_droite'                    : ['eau_coin_bas_droite'                   , False, False, False, 1],
@@ -118,6 +167,19 @@ class Monde:
             'eau_coin_bas_gauche_interieur'          : ['eau_coin_bas_gauche_interieur'         , False, False, False, 1],
             'eau_coin_haut_gauche_interieur'         : ['eau_coin_haut_gauche_interieur'        , False, False, False, 1],
             'eau_coin_haut_droite_interieur'         : ['eau_coin_haut_droite_interieur'        , False, False, False, 1],
+            'eau_coin_bas_droite_exterieur'          : ['eau_coin_bas_droite_exterieur'         , False, False, False, 1],
+            'eau_coin_bas_gauche_exterieur'          : ['eau_coin_bas_gauche_exterieur'         , False, False, False, 1],
+            'eau_virage_bas_droite'                  : ['eau_virage_bas_droite'                 , False, False, False, 1],
+            'eau_virage_bas_gauche'                  : ['eau_virage_bas_gauche'                 , False, False, False, 1],
+            'eau_virage_haut_droite'                 : ['eau_virage_haut_droite'                , False, False, False, 1],
+            'eau_virage_haut_gauche'                 : ['eau_virage_haut_gauche'                , False, False, False, 1],
+            'eau_coin_haut_droite_exterieur'         : ['eau_coin_haut_droite_exterieur'        , False, False, False, 1],
+            'eau_coin_haut_gauche_exterieur'         : ['eau_coin_haut_gauche_exterieur'        , False, False, False, 1],
+            'eau_redirection_droite'                 : ['eau_redirection_droite'                , False, False, False, 1],
+            'eau_redirection_gauche'                 : ['eau_redirection_gauche'                , False, False, False, 1],
+            'eau_redirection_bas'                    : ['eau_redirection_bas'                   , False, False, False, 1],
+            'eau_redirection_haut'                   : ['eau_redirection_haut'                  , False, False, False, 1],
+            'eau_intersection'                       : ['eau_intersection'                      , False, False, False, 1],
             'eau_isole'                              : ['eau_isole'                             , False, False, False, 1],
             'eau_isole_horizontale'                  : ['eau_isole_horizontale'                 , False, False, False, 1],
             'eau_isole_verticale'                    : ['eau_isole_verticale'                   , False, False, False, 1],
@@ -125,23 +187,25 @@ class Monde:
             'eau_fin_droite'                         : ['eau_fin_droite'                        , False, False, False, 1],
             'eau_fin_bas'                            : ['eau_fin_bas'                           , False, False, False, 1],
             'eau_fin_haut'                           : ['eau_fin_haut'                          , False, False, False, 1],
+            'eau_couloir'                            : ['eau_couloir'                           , False, False, False, 1],
             'route droite'                           : ['route droite'                          , False,  True,  True, 1],
             'route verticale'                        : ['route verticale'                       , False,  True,  True, 1],
             'route droitebis'                        : ['route droitebis'                       , False,  True,  True, 1],
             'route horizontale'                      : ['route horizontale'                     , False,  True,  True, 1],
-            'virage vers le bas'                     : ['virage vers le bas'                    , False,  True,  True, 1],
-            'Virage gauche vers droite'              : ['Virage gauche vers droite'             , False,  True,  True, 1],
-            'Virage gauche vers droite vers le haut' : ['Virage gauche vers droite vers le haut', False,  True,  True, 1],
-            'Debut de route'                         : ['Debut de route'                        , False,  True,  True, 1],
-            'Debut de routebis'                      : ['Debut de routebis'                     , False,  True,  True, 1],
-            'Fin de route'                           : ['Fin de route'                          , False,  True,  True, 1],
-            'Fin de routebis'                        : ['Fin de routebis'                       , False,  True,  True, 1],
-            'Fin de routebis2'                       : ['Fin de routebis2'                      , False,  True,  True, 1],
-            'Début intersection deux voix'           : ['Début intersection deux voix'          , False,  True,  True, 1],
-            'Debut intersection deux voixbis'        : ['Debut intersection deux voixbis'       , False,  True,  True, 1],
-            'Intersection'                           : ['Intersection'                          , False,  True,  True, 1],
-            'Intersectionbis'                        : ['Intersectionbis'                       , False,  True,  True, 1],
-            'Carrefour'                              : ['Carrefour'                             , False,  True,  True, 1]
+            'route Virage gauche vers le bas'        : ['route Virage gauche vers le bas', False, True, True, 1],
+            'route virage vers le bas'                     : ['route virage vers le bas'                    , False,  True,  True, 1],
+            'route Virage gauche vers droite'              : ['route Virage gauche vers droite'             , False,  True,  True, 1],
+            'route Virage gauche vers droite vers le haut' : ['route Virage gauche vers droite vers le haut', False,  True,  True, 1],
+            'route Debut de route'                         : ['route Debut de route'                        , False,  True,  True, 1],
+            'route Debut de routebis'                      : ['route Debut de routebis'                     , False,  True,  True, 1],
+            'route Fin de route'                           : ['route Fin de route'                          , False,  True,  True, 1],
+            'route Fin de routebis'                        : ['route Fin de routebis'                       , False,  True,  True, 1],
+            'route Fin de routebis2'                       : ['route Fin de routebis2'                      , False,  True,  True, 1],
+            'route Début intersection deux voix'           : ['route Début intersection deux voix'          , False,  True,  True, 1],
+            'route Debut intersection deux voixbis'        : ['route Debut intersection deux voixbis'       , False,  True,  True, 1],
+            'route Intersection'                           : ['route Intersection'                          , False,  True,  True, 1],
+            'route Intersectionbis'                        : ['route Intersectionbis'                       , False,  True,  True, 1],
+            'route Carrefour'                              : ['route Carrefour'                             , False,  True,  True, 1]
         }
 
         return dictionnaire

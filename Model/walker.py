@@ -16,5 +16,5 @@ class Walker:
         self.nombreDeplacement = (self.nombreDeplacement+1)%10
 
     def set_nextPosition(self):
-        if self.chemin != None and len(self.chemin) > 1:
+        if self.chemin != None and self.chemin != False and len(self.chemin) > 1:
             self.nextPosition = self.chemin[1]

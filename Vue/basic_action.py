@@ -1,11 +1,13 @@
 import pygame
 
 class Basic_Action:
+    OPACITY = 180
+
     def __init__(self, carriere):
         self.is_progress = False
         self.carriere = carriere
 
-    def initialiser(self):
+    def initialiser(self, surface):
         self.is_possible = True
         self.is_progress = True
         self.pos_without_first_click = (0,0)
@@ -14,6 +16,9 @@ class Basic_Action:
         self.grid_position_end = None
         self.coordinate = None 
         self.grid_position_without_first_click = None
+        self.original_surface = surface
+        self.original_surface.set_alpha(Basic_Action.OPACITY)
+        self.image_to_draw = self.original_surface
         
     def events(self, event):
         if self.is_progress:
@@ -47,3 +52,13 @@ class Basic_Action:
         grid_y = int(contrary_iso_y//TILE_SIZE)
 
         return grid_x, grid_y
+
+    def draw_for_an_image(self, grid):
+        if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1]:
+            position = self.carriere.informations_tiles[grid[0]][grid[1]]["position_rendu"]
+            position = (
+                ((position[0]*self.carriere.zoom.multiplier + self.carriere.current_surface.get_width()/2 + self.carriere.camera.scroll.x)),
+                ((position[1]*self.carriere.zoom.multiplier - (self.image_to_draw.get_height() - self.carriere.controleur.TILE_SIZE*self.carriere.zoom.multiplier )+ self.carriere.camera.scroll.y))
+            )
+
+            self.carriere.controleur.screen.blit(self.image_to_draw, position)

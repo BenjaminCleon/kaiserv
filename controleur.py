@@ -68,6 +68,9 @@ class Controleur:
     def walker_creation(self,depart,destination):
         self.metier.walker_creation(depart,destination)
 
+    def check_if_path_exist_from_spawn_walker(self, end):
+        return True if short_path(numpy.array(self.metier.monde.define_matrix_for_path_finding()), (20,39), end) != False else False
+
     def get_walker_infos(self):
         citizens = []
         for walker in self.metier.walkerlist:
