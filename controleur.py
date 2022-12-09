@@ -16,6 +16,7 @@ class Controleur:
         running = True
         self.paused = False
 
+
         # initialisation des valeurs de paramètre
         self.TILE_SIZE = set_tile_size("./settings.txt")
 
@@ -59,8 +60,8 @@ class Controleur:
     def add_building_on_point(self, grid_pos, name):
         self.metier.add_building_on_point(grid_pos, name)
 
-    def clear(self, grid_pos, name):
-        self.metier.clear(grid_pos, name)
+    def clear(self, grid_pos):
+        self.metier.clear(grid_pos)
 
     def get_board(self):
         return self.metier.get_board()
