@@ -14,6 +14,7 @@ class Controleur:
         # variable locale
         self.playing = False
         running = True
+        self.paused = False
 
         # initialisation des valeurs de paramètre
         self.TILE_SIZE = set_tile_size("./settings.txt")
@@ -38,14 +39,19 @@ class Controleur:
             while self.playing:
                 self.clock.tick(60)
                 self.ihm.events()
-                self.metier.update()
-                self.ihm.update()
+                if not self.paused:
+                    self.metier.update()
+                    self.ihm.update()
+                
                 self.ihm.draw()
 
         pygame.exit()
 
     def play(self):
         self.playing = True
+
+    def update_paused(self):
+        self.paused = not self.paused
 
     def check_if_construction_possible_on_grid(self, grid):
         return self.metier.check_if_construction_possible_on_grid(grid)
@@ -77,6 +83,9 @@ class Controleur:
             citizens.append(walker)
 
         return citizens
+
+    def manage_for_road(self, file_names):
+        return self.metier.monde.manage_for_road(file_names)
 
     def should_refresh_from_model(self):
         return self.metier.should_refresh

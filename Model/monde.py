@@ -46,12 +46,58 @@ class Monde:
     # initialise l'entiéreté du plateau
     def init_board(self, file_names):
         file_names = self.manage_for_water(file_names)
+        file_names = self.manage_for_road (file_names)
 
         for num_lig in range(len(file_names)):
             self.board.append([])
             for num_col in range(len(file_names[num_lig])):
                 tile_board = self.grid_to_board(num_lig, num_col, file_names[num_lig][num_col])
                 self.board[num_lig].append(tile_board)
+
+    def manage_for_road(self, file_names):
+        file_names_return = []
+        for num_lig in range(0, len(file_names)):
+            file_names_return.append([])
+            for num_col in range(0, len(file_names)):
+                if file_names[num_lig][num_col][0:5] == "route":
+                    coords = [(-1,0),(0,1),(1,0),(0,-1)]
+                    binary_array = []
+                    for coord in coords:
+                        if (num_lig+coord[0]) >= 0 and (num_lig+coord[0]) < len(file_names)    and \
+                            (num_col+coord[1] >= 0) and (num_col+coord[1] < len(file_names[num_lig])) and \
+                            file_names[num_lig+coord[0]][num_col+coord[1]][0:5] == "route":
+                            binary_array.append(1)
+                        else:
+                            binary_array.append(0)
+
+                    sum = 0
+                    for binary_value, i in zip(binary_array, range(3,-1, -1)):
+                        sum = int(sum + binary_value*math.pow(2, i))
+
+                    tile = "route droite"
+                    match sum:
+                        case  0: pass
+                        case  1: tile = "route Debut de route"
+                        case  2: tile = "route Debut de routebis"
+                        case  3: tile = "route virage vers le bas"
+                        case  4: tile = "route Fin de route"
+                        case  5: tile = "route droite"
+                        case  6: tile = "route Virage gauche vers droite"
+                        case  7: tile = "route Début intersection deux voix"
+                        case  8: tile = "route Fin de routebis"
+                        case  9: tile = "route Virage gauche vers droite vers le haut"
+                        case 10: tile = "route verticale"
+                        case 11: tile = "route Intersectionbis"
+                        case 12: tile = "route Virage gauche vers le bas"
+                        case 13: tile = "route Intersection"
+                        case 14: tile = "route Debut intersection deux voixbis"
+                        case 15: tile = "route Carrefour"
+                    
+                    file_names_return[num_lig].append(tile)
+                else:
+                    file_names_return[num_lig].append(file_names[num_lig][num_col])
+
+        return file_names_return
 
     def manage_for_water(self, file_names):
         file_names_return = []

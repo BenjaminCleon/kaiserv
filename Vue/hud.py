@@ -30,7 +30,8 @@ class HUD:
         size_hud_top = (self.hud_top.get_width()*self.longueur/REFERENCE_SIZE_X, self.hud_top.get_height()*self.hauteur/REFERENCE_SIZE_Y)
         self.hud_top =  pg.transform.scale(self.hud_top, size_hud_top)
 
-        actions = ["build", "clear", "road", "water", "", "", "", "", "", ""]
+        # double boucle, pour pouvoir rajouter de future action
+        actions = ["build", "clear", "road", "", "", "", "", "", "", ""]
         self.button_hud_right = {}
         for i in range(3):
             for j in range(3):
@@ -75,8 +76,6 @@ class HUD:
                                 self.action.is_progress = True
                                 image = pg.image.load("assets/upscale_road/Land2a_00094.png")
                                 self.action.initialiser(image)
-                        case "water":
-                            pass
                 elif self.button_hud_right[button].who_is_visible != "image_click":
                     self.button_hud_right[button].who_is_visible = "image_hover"
 

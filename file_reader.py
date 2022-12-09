@@ -27,6 +27,8 @@ def get_name_sprite(rgb_code):
             return "arbre"
         case ((0,0,255)):
             return "eau"
+        case ((105,105,105)):
+            return "route"
 
     print("Code RGB {} inconnu, poursuite du chargement")
     return None

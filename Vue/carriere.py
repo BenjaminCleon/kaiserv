@@ -27,6 +27,7 @@ class Carriere:
         self.zoom.update(0)
 
         self.buttontestsave = Button_Menu(self.controleur.screen, 0, 0, "Enregistrer")
+        self.buttontestpause = Button_Menu(self.controleur.screen, 0, 200, "Pause")
 
     def draw_main_components(self):
         self.controleur.screen.fill((0, 0, 0))
@@ -37,6 +38,7 @@ class Carriere:
         self.controleur.screen.blit(self.current_surface, (self.camera.scroll.x, self.camera.scroll.y))
         self.draw_walker()
         self.buttontestsave.draw()
+        self.buttontestpause.draw()
 
     def draw_walker(self):
         walkers_infos = self.controleur.get_walker_infos()
@@ -61,6 +63,8 @@ class Carriere:
                 self.zoom.update(event.y)
         if self.buttontestsave.check_button():
             self.Save_game()
+        if self.buttontestpause.check_button():
+            self.controleur.update_paused()
 
     def Save_game(self):
         object = self.controleur.metier

@@ -46,43 +46,11 @@ class Adding_Road(Basic_Action):
             for grid in self.chemins:
                 file_names[grid[0]][grid[1]] = "route"
 
-            for num_lig in range(0, len(file_names)):
-                for num_col in range(0, len(file_names)):
+            file_names = self.carriere.controleur.manage_for_road(file_names)
+            for num_lig in range(len(file_names)):
+                for num_col in range(len(file_names[num_lig])):
                     if file_names[num_lig][num_col][0:5] == "route":
-                        coords = [(-1,0),(0,1),(1,0),(0,-1)]
-                        binary_array = []
-                        for coord in coords:
-                            if (num_lig+coord[0]) >= 0 and (num_lig+coord[0]) < len(file_names)    and \
-                               (num_col+coord[1] >= 0) and (num_col+coord[1] < len(file_names[num_lig])) and \
-                                file_names[num_lig+coord[0]][num_col+coord[1]][0:5] == "route":
-                                binary_array.append(1)
-                            else:
-                                binary_array.append(0)
-
-                        sum = 0
-                        for binary_value, i in zip(binary_array, range(3,-1, -1)):
-                            sum = int(sum + binary_value*math.pow(2, i))
-
-                        tile = "route droite"
-                        match sum:
-                            case  0: pass
-                            case  1: tile = "route Debut de route"
-                            case  2: tile = "route Debut de routebis"
-                            case  3: tile = "route virage vers le bas"
-                            case  4: tile = "route Fin de route"
-                            case  5: tile = "route droite"
-                            case  6: tile = "route Virage gauche vers droite"
-                            case  7: tile = "route Début intersection deux voix"
-                            case  8: tile = "route Fin de routebis"
-                            case  9: tile = "route Virage gauche vers droite vers le haut"
-                            case 10: tile = "route verticale"
-                            case 11: tile = "route Intersectionbis"
-                            case 12: tile = "route Virage gauche vers le bas"
-                            case 13: tile = "route Intersection"
-                            case 14: tile = "route Debut intersection deux voixbis"
-                            case 15: tile = "route Carrefour"
-
-                        self.carriere.controleur.add_building_on_point((num_lig,num_col), tile)
+                        self.carriere.controleur.add_building_on_point((num_lig,num_col), file_names[num_lig][num_col])
 
             self.is_progress = False
             self.carriere.reload_board()
