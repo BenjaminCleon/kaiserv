@@ -24,11 +24,22 @@ class Adding_Road(Basic_Action):
     def draw(self):
         size_of_original_image = self.original_surface.get_size()
         self.image_to_draw = pygame.transform.scale(self.original_surface, (size_of_original_image[0]*self.carriere.zoom.multiplier, size_of_original_image[1]*self.carriere.zoom.multiplier))
-
+        
         if self.grid_position_start != None and self.grid_position_end != None:
             self.getChemin(self.grid_position_start, self.grid_position_end)
+            file_names = [[self.carriere.informations_tiles[i][j]["building"].name for j in
+                          range(0, len(self.carriere.informations_tiles[i]))] for i in
+                          range(0, len(self.carriere.informations_tiles))]
             for grid in self.chemins:
-                self.draw_for_an_image(grid)
+                file_names[grid[0]][grid[1]] = "route"
+
+            file_names = self.carriere.controleur.manage_for_road(file_names)
+            for num_lig in range(len(file_names)):
+                for num_col in range(len(file_names[num_lig])):
+                    if file_names[num_lig][num_col][0:5] == "route":
+                        self.image_to_draw = self.carriere.dictionnaire[file_names[num_lig][num_col]]
+                        self.image_to_draw = pygame.transform.scale(self.image_to_draw, (size_of_original_image[0]*self.carriere.zoom.multiplier, size_of_original_image[1]*self.carriere.zoom.multiplier))
+                        self.draw_for_an_image((num_lig,num_col))
         else:
             self.grid_position_without_first_click = self.mouse_to_grid(self.carriere.current_surface, self.carriere.camera.scroll, self.carriere.controleur.TILE_SIZE * self.carriere.zoom.multiplier, self.pos_without_first_click)
             self.draw_for_an_image(self.grid_position_without_first_click)
