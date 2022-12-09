@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e4b92aa7-28e3-4c53-a0ff-c836823ddba1" name="Changes" comment="add clear">
+      <change afterPath="$PROJECT_DIR$/Model/walker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Arrow_150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Arrow_200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Shovel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Shovel_150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Shovel_200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Sword.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Sword_150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Color_Cursors/Sword_200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00123.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00124.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00125.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00127.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00129.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00131.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00132.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00133.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00135.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00136.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/hud/paneling_00137.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00011.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00012.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00013.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00014.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00015.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00016.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00017.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00018.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00019.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00020.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00021.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00022.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00023.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00024.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00025.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00026.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00027.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00028.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00029.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00030.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00031.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00032.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00033.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00034.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00035.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00036.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00037.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00038.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00039.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00040.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00041.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00042.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00043.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00044.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00045.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00046.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00047.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00048.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00049.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00050.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00051.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00052.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00053.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00054.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00055.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00056.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00057.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00058.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00059.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00060.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00061.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00062.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00063.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00064.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00065.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00066.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00067.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00068.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00069.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00070.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00071.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00072.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00073.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00074.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00075.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00076.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00077.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00078.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00079.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00080.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00081.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00082.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00083.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00084.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00085.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00086.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00087.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00088.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00089.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00090.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00091.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00092.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00093.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00094.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00095.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_citizen/Citizen05_00096.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_house/Housng1a_00001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_house/Housng1a_00002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_house/Housng1a_00003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_house/Housng1a_00004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/upscale_house/Housng1a_00045.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/building.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/building.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/jeu.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/jeu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/monde.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/monde.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/pathfinding.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/pathfinding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/IHM.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/IHM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/adding_building.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/adding_building.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/bouton_hud.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/bouton_hud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/carriere.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/carriere.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/hud.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/hud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/map/map2.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/map/map2.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00004.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00005.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00006.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00007.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00008.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00009.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00010.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00011.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00012.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00013.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00014.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00015.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00016.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00017.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00018.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00019.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00020.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00021.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00022.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00023.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00025.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00026.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00027.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00028.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00029.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00030.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00031.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00032.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00033.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00034.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00035.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00036.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00037.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00038.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00039.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00040.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00041.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00042.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00043.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plateau/plateau_00044.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controleur.py" beforeDir="false" afterPath="$PROJECT_DIR$/controleur.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.sav" beforeDir="false" afterPath="$PROJECT_DIR$/test.sav" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2IGrAgB6miLIFgqivQ1iFWlcup8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="controleur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\alnif\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/controleur.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.controleur" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4b92aa7-28e3-4c53-a0ff-c836823ddba1" name="Changes" comment="" />
+      <created>1669818621314</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669818621314</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add clear">
+      <created>1669820586338</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669820586338</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add clear">
+      <created>1670580106393</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670580106393</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/generateur_water" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add clear" />
+    <option name="LAST_COMMIT_MESSAGE" value="add clear" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Vue/Menu.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
