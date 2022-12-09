@@ -50,6 +50,7 @@ class Controleur:
 
     def play(self):
         self.playing = True
+        self.ihm.pause_menu.displayed = False
 
     def update_paused(self):
         self.paused = not self.paused

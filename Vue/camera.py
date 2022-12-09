@@ -7,8 +7,9 @@ class Camera:
 
         self.width = width
         self.height = height
+        ratio_x, ratio_y = self.width/1920, self.height/1080
 
-        self.scroll = pygame.Vector2(0, 0)
+        self.scroll = pygame.Vector2(-550*ratio_x, -200*ratio_y)
         self.dx = 0
         self.dy = 0
         self.speed = 25

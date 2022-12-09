@@ -4,6 +4,7 @@ import sys
 from .carriere import Carriere
 from .Menu import Menu
 from .hud import HUD
+from .Paused_menu import *
 
 class IHM:
     def __init__(self, controleur):
@@ -15,6 +16,9 @@ class IHM:
         # hud
         self.hud = HUD(self.controleur.screen, self.carriere)
 
+        #Menu pause
+        self.pause_menu = Pause_menu(self.controleur.screen, self.controleur)
+
     # gestion événementielles au clavier
     def events(self):
         for event in pygame.event.get():
@@ -23,10 +27,13 @@ class IHM:
                 self.exit_game()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.exit_game()
+                    self.pause_menu.displayed = not self.pause_menu.displayed  
+                    self.controleur.paused = not self.controleur.paused         
             elif self.controleur.playing:
                 self.carriere.events(event)
                 self.hud.events(event)
+
+        self.pause_menu.events()
 
     def exit_game(self):
         pygame.quit()
@@ -41,7 +48,7 @@ class IHM:
 
         self.carriere.draw_main_components()
         self.hud.draw()
-        
+        self.pause_menu.draw()
         # actualise l'écran
         pygame.display.flip()
 
