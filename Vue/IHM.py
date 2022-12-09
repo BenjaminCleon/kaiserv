@@ -36,6 +36,9 @@ class IHM:
         self.carriere.update()
 
     def draw(self):
+        if self.controleur.should_refresh_from_model():
+            self.carriere.reload_board()
+
         self.carriere.draw_main_components()
         self.hud.draw()
         

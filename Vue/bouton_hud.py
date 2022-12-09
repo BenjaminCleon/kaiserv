@@ -1,5 +1,4 @@
 import os
-from tkinter import Y
 import pygame
 
 class Button_HUD:

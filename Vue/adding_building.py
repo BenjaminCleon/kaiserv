@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 
 from .selectionneur_zone import SelectionneurZone
 
@@ -14,10 +15,12 @@ class Adding_Building(SelectionneurZone):
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.can_thinking:
             for grid in self.grid_to_draw:
                 if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
-                    self.carriere.controleur.check_if_construction_possible_on_grid(grid):
+                    self.carriere.controleur.check_if_construction_possible_on_grid(grid) and grid != (20,39):
                         self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
+                        self.carriere.controleur.walker_creation((20,39),grid)
 
             self.is_progress = False
+            
             self.carriere.reload_board()
 
     def draw(self):
@@ -26,7 +29,7 @@ class Adding_Building(SelectionneurZone):
             for grid in self.grid_to_draw:
                 if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1]:
                     is_construction_possible_on_this_grid = self.carriere.controleur.check_if_construction_possible_on_grid(grid)
-                    if is_construction_possible_on_this_grid :color = (0, 255, 0)
+                    if is_construction_possible_on_this_grid and grid != (20,39):color = (0, 255, 0)
                     else : color = (255,0,0)
                     iso_for_validation = [(x*self.carriere.zoom.multiplier+self.carriere.current_surface.get_width()/2 + self.carriere.camera.scroll.x,
                                         y*self.carriere.zoom.multiplier+ self.carriere.camera.scroll.y) for x,y in self.carriere.informations_tiles[grid[0]][grid[1]]["iso"]]

@@ -35,7 +35,26 @@ class Carriere:
             self.zoom.should_scale = False
         
         self.controleur.screen.blit(self.current_surface, (self.camera.scroll.x, self.camera.scroll.y))
+        self.draw_walker()
         self.buttontestsave.draw()
+
+    def draw_walker(self):
+        walkers_infos = self.controleur.get_walker_infos()
+        if walkers_infos != None:
+            for walker in walkers_infos:
+                if walker.destination != walker.actualPosition:
+                    coef = walker.nombreDeplacement / walker.nb_deplacement_max
+                    image = self.dictionnaire[walker.name]
+                    image = pygame.transform.scale(image, (image.get_width()*self.zoom.multiplier, image.get_height()*self.zoom.multiplier))
+                    positionActuelle = self.informations_tiles[walker.actualPosition[0]][walker.actualPosition[1]]["position_rendu"]
+                    positionSuivante = self.informations_tiles[walker.nextPosition  [0]][walker.nextPosition  [1]]["position_rendu"]
+                    positionFinale   = (positionActuelle[0]+(positionSuivante[0] - positionActuelle[0])*coef, positionActuelle[1]+(positionSuivante[1] - positionActuelle[1])*coef)
+                    positionFinale = (
+                        ((positionFinale[0]*self.zoom.multiplier + self.current_surface.get_width()/2 + self.camera.scroll.x)),
+                        ((positionFinale[1]*self.zoom.multiplier - (image.get_height() - self.controleur.TILE_SIZE*self.zoom.multiplier )+ self.camera.scroll.y))
+                    )
+
+                    self.controleur.screen.blit(image, positionFinale)
 
     def events(self, event):
         if event.type == pygame.MOUSEWHEEL:
@@ -56,6 +75,7 @@ class Carriere:
         self.basic_surface = pygame.Surface(self.basic_surface_size)
         self.current_surface = self.basic_surface
         self.informations_tiles = self.controleur.get_board()
+
         for num_lig in range(len(self.informations_tiles)):
             for num_col in range(len(self.informations_tiles[num_lig])):
                 name = self.informations_tiles[num_lig][num_col]["building"].name
@@ -91,13 +111,17 @@ class Carriere:
             'eau_coin_bas_droite_interieur' : pygame.image.load("assets/upscale_land/Land1a_00173.png").convert_alpha(),
             'eau_coin_bas_gauche_interieur' : pygame.image.load("assets/upscale_land/Land1a_00170.png").convert_alpha(),
             'eau_coin_haut_gauche_interieur': pygame.image.load("assets/upscale_land/Land1a_00171.png").convert_alpha(),
-            'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha()
+            'eau_coin_haut_droite_interieur': pygame.image.load('assets/upscale_land/Land1a_00172.png').convert_alpha(),
+            'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha(),
+            'citizen'                       : pygame.image.load("assets/upscale_citizen/Citizen05_00001.png").convert_alpha(),
+            'tente'                         : pygame.image.load("assets/upscale_house/Housng1a_00002.png").convert_alpha()
         }
         return dictionnaire
 
     def get_dictionnary_by_path(self):
         dictionnaire = {
             "assets/upscale_land/Land1a_00115.png": 'herbe'                         ,
+            "assets/upscale_house/Housng1a_00045.png": "panneau"                    ,
             "assets/upscale_land/Land1a_00049.png": 'arbre'                         ,
             "assets/upscale_land/Land1a_00120.png": 'eau'                           ,
             "assets/upscale_land/Land1a_00136.png": 'eau_haut'                      ,
@@ -111,7 +135,8 @@ class Carriere:
             "assets/upscale_land/Land1a_00173.png": 'eau_coin_bas_droite_interieur' ,
             "assets/upscale_land/Land1a_00170.png": 'eau_coin_bas_gauche_interieur' ,
             "assets/upscale_land/Land1a_00171.png": 'eau_coin_haut_gauche_interieur',
-            'assets/upscale_land/Land1a_00172.png': 'eau_coin_haut_droite_interieur'
+            'assets/upscale_land/Land1a_00172.png': 'eau_coin_haut_droite_interieur',
+            "assets/upscale_house/Housng1a_00002.png": 'tente'
         }
         return dictionnaire
 

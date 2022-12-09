@@ -7,4 +7,4 @@ class Building:
         self.square_size            = square_size
 
     def get_canbewalkthrough_into_integer(self):
-        return 1 if self.can_be_walk_through else 0
+        return 0 if self.can_be_walk_through else 1

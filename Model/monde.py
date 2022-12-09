@@ -53,6 +53,8 @@ class Monde:
     def get_information_for_each_tile(self):
         dictionnaire = {
             'herbe'                         : ['herbe'                         , False, True , True , 1],
+            'panneau'                       : ['panneau'                       , False, True , True , 1],
+            'tente'                         : ['tente'                         , True , False, False, 1],
             'arbre'                         : ['arbre'                         , True , False, False, 1],
             'eau'                           : ['eau'                           , False, False, False, 1],
             'eau_haut'                      : ['eau_haut'                      , False, False, False, 1],
@@ -72,7 +74,7 @@ class Monde:
         return dictionnaire
 
     def define_matrix_for_path_finding(self):
-        return [self.board[i][j]["building"].get_canbewalkthrough_into_integer() for i in range(0,len(self.board)) for j in range(0, len(self.board[0]))]
+        return [[self.board[i][j]["building"].get_canbewalkthrough_into_integer() for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
             
     def check_if_construction_possible_on_grid(self,grid):
         return self.board[grid[0]][grid[1]]["building"].can_constructible_over
