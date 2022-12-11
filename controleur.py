@@ -34,15 +34,15 @@ class Controleur:
         while running:
             # boucle du jeu
             self.ihm.events()
-            self.ihm.menu.events()
             self.ihm.menu.draw()
             self.clock.tick(60)
             while self.playing:
                 self.clock.tick(60)
-                self.ihm.events()
-                if not self.paused:
-                    self.metier.update()
-                    self.ihm.update()
+                if self.metier != None:
+                    self.ihm.events()
+                    if not self.paused:
+                        self.metier.update()
+                        self.ihm.update()
                 
                 self.ihm.draw()
 

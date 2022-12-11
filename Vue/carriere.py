@@ -26,6 +26,10 @@ class Carriere:
         self.zoom = Zoom()
         self.zoom.update(0)
 
+    def reset(self):
+        self.zoom = Zoom()
+        self.zoom.update(0)
+        self.camera = Camera(self.width, self.height)
 
     def draw_main_components(self):
         self.controleur.screen.fill((0, 0, 0))
@@ -93,8 +97,6 @@ class Carriere:
     # permet de récupérer le chemin d'une image
     def get_tile(self):
         dictionnaire = {
-            'herbe'                         : pygame.image.load("assets/upscale_land/Land1a_00115.png").convert_alpha(),
-            'arbre'                         : pygame.image.load("assets/upscale_land/Land1a_00049.png").convert_alpha(),
             'eau'                           : pygame.image.load("assets/upscale_sea/Land1a_00120.png").convert_alpha(),
             'eau_haut'                      : pygame.image.load("assets/upscale_sea/Land1a_00136.png").convert_alpha(),
             'eau_bas'                       : pygame.image.load("assets/upscale_sea/Land1a_00128.png").convert_alpha(),
@@ -163,13 +165,18 @@ class Carriere:
             'route Intersectionbis': pygame.image.load('assets/upscale_road/Land2a_00109.png').convert_alpha(),
             'route Carrefour'      : pygame.image.load('assets/upscale_road/Land2a_00110.png').convert_alpha()
         }
+
+        for i in range(40, 62):
+            dictionnaire["arbre_{}".format(i)] = pygame.image.load('assets/upscale_land/Land1a_000{}.png'.format(i)).convert_alpha()
+
+        for i in range(110, 120):
+            dictionnaire["herbe_{}".format(i)] = pygame.image.load('assets/upscale_land/Land1a_00{}.png'.format(i)).convert_alpha()
+
         return dictionnaire
 
     def get_dictionnary_by_path(self):
         dictionnaire = {
-            "assets/upscale_land/Land1a_00115.png": 'herbe'                         ,
             "assets/upscale_house/Housng1a_00045.png": "panneau"                    ,
-            "assets/upscale_sea/Land1a_00049.png": 'arbre'                         ,
             "assets/upscale_sea/Land1a_00120.png": 'eau'                           ,
             "assets/upscale_sea/Land1a_00136.png": 'eau_haut'                      ,
             "assets/upscale_sea/Land1a_00128.png": 'eau_bas'                       ,
@@ -208,5 +215,12 @@ class Carriere:
             "assets/upscale_road/Land2a_00109.png" : 'route Intersectionbis',
             "assets/upscale_road/Land2a_00110.png" : 'route Carrefour'
         }
+
+        for i in range(40, 62):
+            dictionnaire["assets/upscale_land/Land1a_000{}.png".format(i)] = "arbre_{}".format(i)
+        
+        for i in range(110, 120):
+            dictionnaire["assets/upscale_land/Land1a_00{}.png".format(i)] = "herbe_{}".format(i)
+
         return dictionnaire
 

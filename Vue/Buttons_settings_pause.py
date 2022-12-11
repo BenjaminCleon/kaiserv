@@ -16,6 +16,7 @@ class Button_Menu_paused():
         self.text_click = (255, 255, 255) 
         self.text_base = self.text_original
         self.text_hover = (165, 42, 42)
+        self.can_thinking = False
       
 
 
@@ -26,20 +27,24 @@ class Button_Menu_paused():
         text_len = text_img.get_width()
         self.screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + 10))
 
-    #couleur du bouton selon action souris
-    def check_button(self):
+    #couleur du bouton selon action souris et l'action est-elle en cours ?
+    def check_button(self, event):
         action = False
         pos = pygame.mouse.get_pos()
-        mouse_action = pygame.mouse.get_pressed()
 
         if self.button_rect.collidepoint(pos):
-            if mouse_action[0]:
-
-                self.text_base = self.text_click
-                action = True
-            else:
-                self.text_base = self.text_hover
+            self.text_base = self.text_hover
         else:
             self.text_base = self.text_original
 
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.button_rect.collidepoint(pos): self.can_thinking = True
+        if self.can_thinking:
+            if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.button_rect.collidepoint(pos):
+                pygame.draw.rect(self.screen, self.text_click, self.button_rect)
+                self.text_base = self.text_click
+                action = True
+
+        if action == True:
+            self.can_thinking = False
+            
         return action

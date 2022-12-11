@@ -39,25 +39,28 @@ class Pause_menu:
         self.quitter = Button_Menu_paused(self.screen, self.center_x, self.center_y  - (-1*self.space), 'Quitter le jeu')
             
 
-    def events(self):
+    def events(self, event):
         if self.displayed :
 
             # revenir au menu principale 
-            if self.menu_principale.check_button():
+            if self.menu_principale.check_button(event):
+                self.controleur.ihm.carriere.reset()
                 self.controleur.playing = False
-                self.controleur.paused = False 
+                self.controleur.paused  = False 
 
             #
-            if self.new_game.check_button():
+            if self.new_game.check_button(event):
                 self.controleur.create_new_game()
                 self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
                 self.controleur.ihm.init_sprite()
                 self.controleur.play()
+                self.controleur.paused = False 
             
-            if self.save.check_button():
+            if self.save.check_button(event):
                 self.controleur.ihm.carriere.Save_game()
 
-            if self.quitter.check_button():
+
+            if self.quitter.check_button(event):
                 run = False
                 sys.exit()
 

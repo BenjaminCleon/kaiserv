@@ -187,7 +187,6 @@ class Monde:
             'herbe'                                  : ['herbe'                                 , False, True , True , 1],
             'panneau'                                : ['panneau'                               , True , True , True , 1],
             'tente'                                  : ['tente'                                 , True , False, False, 1],
-            'arbre'                                  : ['arbre'                                 , True , False, False, 1],
             'eau'                                    : ['eau'                                   , False, False, False, 1],
             'eau_haut'                               : ['eau_haut'                              , False, False, False, 1],
             'eau_bas'                                : ['eau_bas'                               , False, False, False, 1],
@@ -254,6 +253,12 @@ class Monde:
             'route Carrefour'                              : ['route Carrefour'                             , True,  True,  True, 1]
         }
 
+        for i in range(40,62):
+            dictionnaire['arbre_{}'.format(i)] = ['arbre_{}'.format(i) , True , False, False, 1]
+
+        for i in range(110,120):
+            dictionnaire['herbe_{}'.format(i)] = ['herbe_{}'.format(i) , False , True, True, 1]
+        
         return dictionnaire
 
     def define_matrix_for_path_finding(self):

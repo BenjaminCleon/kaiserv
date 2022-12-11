@@ -25,15 +25,17 @@ class IHM:
             # quitte lors de la combinaison de touche alt+f4
             if event.type == pygame.QUIT:
                 self.exit_game()
-            if event.type == pygame.KEYDOWN:
+            if self.controleur.playing == False:
+                self.menu.events(event)
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.pause_menu.displayed = not self.pause_menu.displayed  
                     self.controleur.paused = not self.controleur.paused         
             elif self.controleur.playing:
                 self.carriere.events(event)
                 self.hud.events(event)
-
-        self.pause_menu.events()
+    
+            self.pause_menu.events(event)
 
     def exit_game(self):
         pygame.quit()
@@ -55,4 +57,3 @@ class IHM:
     # initialise chaque sprite à afficher 
     def init_sprite(self):
         self.carriere.init_sprite()
-  

@@ -1,4 +1,5 @@
 from PIL import Image
+import random
 
 def set_tile_size(file_name):
     with open(file_name) as file_read:
@@ -22,9 +23,9 @@ def reader_bmp_map(map_number, controleur):
 def get_name_sprite(rgb_code):
     match rgb_code:
         case ((0,255,0)):
-            return "herbe"
+            return "herbe_{}".format(random.randint(110,119))
         case((0,180,0)):
-            return "arbre"
+            return "arbre_{}".format(random.randint(40,61))
         case ((0,0,255)):
             return "eau"
         case ((105,105,105)):

@@ -38,14 +38,15 @@ class Menu():
             self.Creators        = Button_Menu(self.screen, self.mid_width, self.mid_height + (2 * GAP), 'Creators')
             self.Exit            = Button_Menu(self.screen, self.mid_width, self.mid_height + (3 * GAP), 'Exit')
             
-    def events(self):
-        if self.Start_new_career.check_button():
+    def events(self, event):
+        if self.Start_new_career.check_button(event):
+            self.Start_new_career.current_col = self.Start_new_career.button_col
             self.controleur.create_new_game()
             self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
             self.controleur.ihm.init_sprite()
             self.controleur.play()
 
-        if self.Load_Saved_Game.check_button():
+        if self.Load_Saved_Game.check_button(event):
             self.controleur.metier = pickle.load(open("test.sav", 'rb'))
             # fixe la taille du plateau de jeu
             self.controleur.grid_height  = len(self.controleur.metier.monde.board)
@@ -54,24 +55,23 @@ class Menu():
             self.controleur.ihm.init_sprite()
             self.controleur.play()
 
-        if self.Exit.check_button():
+        if self.Exit.check_button(event):
             run = False
             sys.exit()
 
-        if self.Options.check_button():
+        if self.Options.check_button(event):
             self.current = "Options"
             self.display_settings()
             run = False
 
-        if self.Creators.check_button():
+        if self.Creators.check_button(event):
             self.current = "Creators"
             self.display_creators()
             run = False
-
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                run = False
-                sys.exit()
+        
+        if event.type == pg.QUIT:
+            run = False
+            sys.exit()
 
     def draw(self):
         self.screen.blit(self.background, (0, 0))
