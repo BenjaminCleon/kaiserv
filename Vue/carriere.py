@@ -44,7 +44,8 @@ class Carriere:
         walkers_infos = self.controleur.get_walker_infos()
         if walkers_infos != None:
             for walker in walkers_infos:
-                if walker.destination != walker.actualPosition:
+                if walker.destination != walker.actualPosition and self.informations_tiles[walker.actualPosition[0]][walker.actualPosition[1]]["position_rendu"] != None \
+                    and self.informations_tiles[walker.nextPosition[0]][walker.nextPosition[1]]["position_rendu"] != None:
                     coef = walker.nombreDeplacement / walker.nb_deplacement_max
                     image = self.dictionnaire[walker.name]
                     image = pygame.transform.scale(image, (image.get_width()*self.zoom.multiplier, image.get_height()*self.zoom.multiplier))
@@ -97,6 +98,7 @@ class Carriere:
     # permet de récupérer le chemin d'une image
     def get_tile(self):
         dictionnaire = {
+            'while_crafting'                : pygame.image.load("assets/upscale_land/Land2a_00001.png").convert_alpha(),
             'eau'                           : pygame.image.load("assets/upscale_sea/Land1a_00120.png").convert_alpha(),
             'eau_haut'                      : pygame.image.load("assets/upscale_sea/Land1a_00136.png").convert_alpha(),
             'eau_bas'                       : pygame.image.load("assets/upscale_sea/Land1a_00128.png").convert_alpha(),
@@ -176,6 +178,7 @@ class Carriere:
 
     def get_dictionnary_by_path(self):
         dictionnaire = {
+            "assets/upscale_sea/Land2a_00001.png"    : "while_crafting",
             "assets/upscale_house/Housng1a_00045.png": "panneau"                    ,
             "assets/upscale_sea/Land1a_00120.png": 'eau'                           ,
             "assets/upscale_sea/Land1a_00136.png": 'eau_haut'                      ,

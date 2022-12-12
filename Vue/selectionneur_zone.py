@@ -1,7 +1,6 @@
 import pygame
 from .basic_action import Basic_Action
 
-
 class SelectionneurZone(Basic_Action):
     OPACITY = 180
     
@@ -24,4 +23,5 @@ class SelectionneurZone(Basic_Action):
 
             self.grid_to_draw.append(self.grid_position_without_first_click)
         for grid in self.grid_to_draw:
-            self.draw_for_an_image(grid)
+            if self.path != "assets/upscale_house/Housng1a_00045.png" or self.carriere.controleur.check_if_construction_possible_on_grid(grid):
+                self.draw_for_an_image(grid)

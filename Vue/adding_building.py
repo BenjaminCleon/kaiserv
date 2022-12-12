@@ -1,5 +1,4 @@
 import pygame
-import asyncio
 
 from .selectionneur_zone import SelectionneurZone
 
@@ -13,24 +12,15 @@ class Adding_Building(SelectionneurZone):
         SelectionneurZone.events(self, event)
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: self.can_thinking = True
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.can_thinking:
+            last_grid = self.grid_to_draw[len(self.grid_to_draw)-1]
             for grid in self.grid_to_draw:
-                if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
-                    self.carriere.controleur.check_if_construction_possible_on_grid(grid) and grid != (20,39) and self.carriere.controleur.check_if_path_exist_from_spawn_walker(grid):
-                        self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
-                        self.carriere.controleur.walker_creation((20,39),grid)
+                self.treat_event(grid, last_grid)
 
+    def treat_event(self, grid, last_grid):
+        if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
+           self.carriere.controleur.check_if_construction_possible_on_grid(grid) and grid != (20,39) and self.carriere.controleur.check_if_path_exist_from_spawn_walker(grid):
+            self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
+            self.carriere.controleur.walker_creation((20,39),grid)
+
+        if last_grid == grid:
             self.is_progress = False
-            
-            self.carriere.reload_board()
-
-    def draw(self):
-        SelectionneurZone.draw(self)
-        if self.is_progress:
-            for grid in self.grid_to_draw:
-                if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1]:
-                    is_construction_possible_on_this_grid = self.carriere.controleur.check_if_construction_possible_on_grid(grid) and self.carriere.controleur.check_if_path_exist_from_spawn_walker(grid)
-                    if is_construction_possible_on_this_grid and grid != (20,39):color = (0, 255, 0)
-                    else : color = (255,0,0)
-                    iso_for_validation = [(x*self.carriere.zoom.multiplier+self.carriere.current_surface.get_width()/2 + self.carriere.camera.scroll.x,
-                                        y*self.carriere.zoom.multiplier+ self.carriere.camera.scroll.y) for x,y in self.carriere.informations_tiles[grid[0]][grid[1]]["iso"]]
-                    pygame.draw.polygon(self.carriere.controleur.screen, color, iso_for_validation, 3)

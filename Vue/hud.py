@@ -18,7 +18,7 @@ class HUD:
         REFERENCE_SIZE_Y = 1080
 
         # ecart entre chaque action de l'hud de droite 
-        HORIZONTAL_GAP = self.longueur*0.026
+        HORIZONTAL_GAP = self.longueur*0.032
         VERTICAL_GAP   = self.hauteur *0.034
 
         #chargement de l'image
@@ -36,8 +36,8 @@ class HUD:
         for i in range(3):
             for j in range(3):
                 self.button_hud_right[actions[i*3+j]] = Button_HUD(self.screen,
-                                                                   self.screen.get_width()*0.923+j*HORIZONTAL_GAP,
-                                                                   self.screen.get_height()*0.279+i*VERTICAL_GAP ,
+                                                                   self.screen.get_width()*0.905+j*HORIZONTAL_GAP,
+                                                                   self.screen.get_height()*0.348+i*VERTICAL_GAP ,
                                                                    actions[i*3+j])
 
     def events(self, event):
@@ -46,7 +46,9 @@ class HUD:
 
         if self.action is not None:
             self.action.events(event)
-            if self.action.is_progress == False: self.action = None
+            if self.action.is_progress == False:
+                self.carriere.reload_board()
+                self.action = None
         
         for button in self.button_hud_right:
             if self.button_hud_right[button].rect.collidepoint(pos):
@@ -60,7 +62,7 @@ class HUD:
                             if self.action == None: self.action = Adding_Building(self.carriere, "assets/upscale_house/Housng1a_00045.png")
                             if not self.action.is_progress:
                                 self.action.is_progress = True
-                                image = pg.image.load("assets/upscale_house/Housng1a_00045.png")
+                                image = pg.image.load("assets/upscale_land/Land2a_00001.png")
                                 self.action.initialiser(image)
                         case "clear":
                             
@@ -82,11 +84,11 @@ class HUD:
                 self.button_hud_right[button].who_is_visible = ""
 
     def draw(self):
-        self.screen.blit(self.hud_right, (self.longueur*0.917, self.hauteur*0.0235))
-        self.screen.blit(self.hud_top, (0, 0))
-        
         if self.action != None: self.action.draw()
 
+        self.screen.blit(self.hud_right, (self.longueur*0.895, self.hauteur*0.0235))
+        self.screen.blit(self.hud_top, (0, 0))
+        
         for button in self.button_hud_right:
             self.button_hud_right[button].draw()
 

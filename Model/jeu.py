@@ -1,3 +1,4 @@
+import random
 from .monde import Monde
 from .walker import Walker
 from .pathfinding import short_path
@@ -42,7 +43,16 @@ class Jeu:
 
     def clear(self,grid):
         if self.check_if_clear_possible_on_grid(grid):
-            self.monde.add_building_on_point(grid, 'herbe')
+            name = self.monde.board[grid[0]][grid[1]]["building"].name
+            if name == "tente" or name == "panneau":
+                walker_tmp = None
+                for walker in self.walkerlist:
+                    if walker.destination == grid:
+                        walker_tmp = walker
+                        break
+                if walker_tmp != None: self.walkerlist.remove(walker_tmp)
+
+            self.monde.add_building_on_point(grid, 'herbe_{}'.format(random.randint(110,119)))
 
     def add_building_on_point(self, grid_pos, path):
         self.monde.add_building_on_point(grid_pos, path)

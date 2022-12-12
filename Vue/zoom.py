@@ -1,6 +1,4 @@
 
-import pygame
-
 class Zoom:
 
     def __init__(self):

@@ -5,6 +5,7 @@ from .carriere import Carriere
 from .Menu import Menu
 from .hud import HUD
 from .Paused_menu import *
+from .utils import draw_text
 
 class IHM:
     def __init__(self, controleur):
@@ -50,7 +51,9 @@ class IHM:
 
         self.carriere.draw_main_components()
         self.hud.draw()
+        draw_text(self.controleur.screen, "Population: {}".format(self.controleur.get_population()), 20, (0,0,0), (self.controleur.screen.get_width()*0.91, self.controleur.screen.get_height()*0.57))
         self.pause_menu.draw()
+
         # actualise l'écran
         pygame.display.flip()
 

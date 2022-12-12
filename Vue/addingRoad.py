@@ -60,8 +60,10 @@ class Adding_Road(Basic_Action):
             file_names = self.carriere.controleur.manage_for_road(file_names)
             for num_lig in range(len(file_names)):
                 for num_col in range(len(file_names[num_lig])):
-                    if file_names[num_lig][num_col][0:5] == "route" and  self.carriere.controleur.check_if_construction_possible_on_grid((num_lig,num_col)):
+                    if file_names[num_lig][num_col][0:5] == "route" and  ( self.carriere.controleur.check_if_construction_possible_on_grid((num_lig,num_col)) or \
+                                                                           self.carriere.informations_tiles[num_lig][num_col]["building"].name[0:5] == "route" ):
                         self.carriere.controleur.add_building_on_point((num_lig,num_col), file_names[num_lig][num_col])
 
             self.is_progress = False
+            
             self.carriere.reload_board()

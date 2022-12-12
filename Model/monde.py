@@ -1,5 +1,6 @@
 
 # classe permettant de gérer la logique géométrique du monde
+import numpy
 from .building import Building
 import math
 
@@ -184,7 +185,6 @@ class Monde:
 
     def get_information_for_each_tile(self):
         dictionnaire = {
-            'herbe'                                  : ['herbe'                                 , False, True , True , 1],
             'panneau'                                : ['panneau'                               , True , True , True , 1],
             'tente'                                  : ['tente'                                 , True , False, False, 1],
             'eau'                                    : ['eau'                                   , False, False, False, 1],
@@ -233,24 +233,24 @@ class Monde:
             'eau_fin_bas'                            : ['eau_fin_bas'                           , False, False, False, 1],
             'eau_fin_haut'                           : ['eau_fin_haut'                          , False, False, False, 1],
             'eau_couloir'                            : ['eau_couloir'                           , False, False, False, 1],
-            'route droite'                           : ['route droite'                          , True ,  True,  True, 1],
-            'route verticale'                        : ['route verticale'                       , True ,  True,  True, 1],
-            'route droitebis'                        : ['route droitebis'                       , True ,  True,  True, 1],
-            'route horizontale'                      : ['route horizontale'                     , True ,  True,  True, 1],
-            'route Virage gauche vers le bas'        : ['route Virage gauche vers le bas', True, True, True, 1],
-            'route virage vers le bas'                     : ['route virage vers le bas'                    , True,  True,  True, 1],
-            'route Virage gauche vers droite'              : ['route Virage gauche vers droite'             , True,  True,  True, 1],
-            'route Virage gauche vers droite vers le haut' : ['route Virage gauche vers droite vers le haut', True,  True,  True, 1],
-            'route Debut de route'                         : ['route Debut de route'                        , True,  True,  True, 1],
-            'route Debut de routebis'                      : ['route Debut de routebis'                     , True,  True,  True, 1],
-            'route Fin de route'                           : ['route Fin de route'                          , True,  True,  True, 1],
-            'route Fin de routebis'                        : ['route Fin de routebis'                       , True,  True,  True, 1],
-            'route Fin de routebis2'                       : ['route Fin de routebis2'                      , True,  True,  True, 1],
-            'route Début intersection deux voix'           : ['route Début intersection deux voix'          , True,  True,  True, 1],
-            'route Debut intersection deux voixbis'        : ['route Debut intersection deux voixbis'       , True,  True,  True, 1],
-            'route Intersection'                           : ['route Intersection'                          , True,  True,  True, 1],
-            'route Intersectionbis'                        : ['route Intersectionbis'                       , True,  True,  True, 1],
-            'route Carrefour'                              : ['route Carrefour'                             , True,  True,  True, 1]
+            'route droite'                           : ['route droite'                          , True , False,  True, 1],
+            'route verticale'                        : ['route verticale'                       , True , False,  True, 1],
+            'route droitebis'                        : ['route droitebis'                       , True , False,  True, 1],
+            'route horizontale'                      : ['route horizontale'                     , True , False,  True, 1],
+            'route Virage gauche vers le bas'        : ['route Virage gauche vers le bas', True, False, True, 1],
+            'route virage vers le bas'                     : ['route virage vers le bas'                    , True,  False,  True, 1],
+            'route Virage gauche vers droite'              : ['route Virage gauche vers droite'             , True,  False,  True, 1],
+            'route Virage gauche vers droite vers le haut' : ['route Virage gauche vers droite vers le haut', True,  False,  True, 1],
+            'route Debut de route'                         : ['route Debut de route'                        , True,  False,  True, 1],
+            'route Debut de routebis'                      : ['route Debut de routebis'                     , True,  False,  True, 1],
+            'route Fin de route'                           : ['route Fin de route'                          , True,  False,  True, 1],
+            'route Fin de routebis'                        : ['route Fin de routebis'                       , True,  False,  True, 1],
+            'route Fin de routebis2'                       : ['route Fin de routebis2'                      , True,  False,  True, 1],
+            'route Début intersection deux voix'           : ['route Début intersection deux voix'          , True,  False,  True, 1],
+            'route Debut intersection deux voixbis'        : ['route Debut intersection deux voixbis'       , True,  False,  True, 1],
+            'route Intersection'                           : ['route Intersection'                          , True,  False,  True, 1],
+            'route Intersectionbis'                        : ['route Intersectionbis'                       , True,  False,  True, 1],
+            'route Carrefour'                              : ['route Carrefour'                             , True,  False,  True, 1]
         }
 
         for i in range(40,62):
@@ -265,8 +265,10 @@ class Monde:
         return [[self.board[i][j]["building"].get_canbewalkthrough_into_integer() for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
             
     def check_if_construction_possible_on_grid(self,grid):
-        return self.board[grid[0]][grid[1]]["building"].can_constructible_over
-
+        if grid[0] >= 0 and grid[0] < len(self.board) and grid[1] >= 0 and grid[1] < len(self.board[grid[0]]):
+            return self.board[grid[0]][grid[1]]["building"].can_constructible_over
+        
+        return False
 
     def check_if_clear_possible_on_grid(self, grid):
         return self.board[grid[0]][grid[1]]["building"].can_be_erase

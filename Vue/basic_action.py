@@ -6,6 +6,7 @@ class Basic_Action:
     def __init__(self, carriere):
         self.is_progress = False
         self.carriere = carriere
+        self.path = None
 
     def initialiser(self, surface):
         self.is_possible = True
@@ -34,7 +35,6 @@ class Basic_Action:
                 self.grid_position_end = self.mouse_to_grid(self.carriere.current_surface, self.carriere.camera.scroll, self.carriere.controleur.TILE_SIZE*self.carriere.zoom.multiplier, self.pos_without_first_click )
                 self.coordinate = self.get_square_coords_from_top_right(self.grid_position_start, self.grid_position_end)
 
-            
     def get_square_coords_from_top_right(self, grid_start, grid_end):
         positions = [grid_start, grid_end]
         minim = (min([x for x, y in positions]), min([y for x, y in positions]))

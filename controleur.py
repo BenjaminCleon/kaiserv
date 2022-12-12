@@ -55,6 +55,9 @@ class Controleur:
     def update_paused(self):
         self.paused = not self.paused
 
+    def get_population(self):
+        return len(self.metier.walkerlist)
+
     def check_if_construction_possible_on_grid(self, grid):
         return self.metier.check_if_construction_possible_on_grid(grid)
 
