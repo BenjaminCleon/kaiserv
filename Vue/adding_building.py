@@ -1,4 +1,5 @@
 import pygame
+import math
 
 from .selectionneur_zone import SelectionneurZone
 
@@ -19,8 +20,14 @@ class Adding_Building(SelectionneurZone):
     def treat_event(self, grid, last_grid):
         if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \
            self.carriere.controleur.check_if_construction_possible_on_grid(grid) and grid != (20,39) and self.carriere.controleur.check_if_path_exist_from_spawn_walker(grid):
-            self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
-            self.carriere.controleur.walker_creation((20,39),grid)
+           for num_lig in range(0, len(self.carriere.informations_tiles)):
+            for num_col in range(0, len(self.carriere.informations_tiles[num_lig])):
+                if self.carriere.informations_tiles[num_lig][num_col]["building"].name[0:5] == "route" and self.calcul_distance_to_grid(grid, (num_lig, num_col)) <= 2:
+                    self.carriere.controleur.add_building_on_point(grid, self.carriere.dictionnaire_reverse_by_path[self.path])
+                    self.carriere.controleur.walker_creation((20,39),grid)
 
         if last_grid == grid:
             self.is_progress = False
+
+    def calcul_distance_to_grid(self, grid_start, grid_stop):
+        return int(math.sqrt((grid_stop[0]-grid_start[0])**2 + (grid_stop[1]-grid_start[1])**2))
