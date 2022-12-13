@@ -15,6 +15,7 @@ class Pause_menu:
         self.font = pg.font.SysFont('Constantia', 75)
         self.font2 = pg.font.SysFont('Constantia', 50)
         self.space = 60
+        self.text = "Pause"
         self.menu_principale = False
         self.new_game = False
         self.save = False
@@ -37,7 +38,11 @@ class Pause_menu:
         self.new_game = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y - (1*self.space), 'Nouvelle partie')
         self.save = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y, 'Sauvegarder')
         self.quitter = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y  - (-1*self.space), 'Quitter le jeu')
-            
+
+        #longueur titre : "Pause"
+        self.title_menu = self.font.render(self.text, True, (0, 0, 0))
+        self.width_title = self.title_menu.get_width()
+      
 
     def events(self, event):
         if self.displayed :
@@ -69,7 +74,7 @@ class Pause_menu:
         if self.displayed :
 
             self.screen.blit(self.fond_menu,(self.center_x - (self.new_longueur_centre_image_menu*0.42) , self.center_y - (self.new_longueur_centre_image_menu*0.7)))
-            self.screen.blit(self.font.render(" Pause ", True, (0, 0, 0)),(self.center_x*0.92, self.center_y*0.60))
+            self.screen.blit(self.title_menu,((self.center_x - self.width_title/3, self.center_y - (3.5*self.space))))
             
             self.new_game.draw()
             self.save.draw()
