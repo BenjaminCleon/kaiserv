@@ -33,10 +33,10 @@ class Pause_menu:
         self.fond_menu = pg.transform.scale(self.fond_menu, (self.new_longueur_centre_image_menu, self.new_largeur_centre_image_menu))
     
         #création bouttons
-        self.menu_principale = Button_Menu_paused(self.screen, self.center_x, self.center_y - (2*self.space), 'Menu principale')
-        self.new_game = Button_Menu_paused(self.screen, self.center_x, self.center_y - (1*self.space), 'Nouvelle partie')
-        self.save = Button_Menu_paused(self.screen, self.center_x, self.center_y, 'Sauvegarder')
-        self.quitter = Button_Menu_paused(self.screen, self.center_x, self.center_y  - (-1*self.space), 'Quitter le jeu')
+        self.menu_principale = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y - (2*self.space), 'Menu principale')
+        self.new_game = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y - (1*self.space), 'Nouvelle partie')
+        self.save = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y, 'Sauvegarder')
+        self.quitter = Button_Menu_paused(self.screen, self.center_x - self.space*1.4, self.center_y  - (-1*self.space), 'Quitter le jeu')
             
 
     def events(self, event):

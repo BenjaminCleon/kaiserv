@@ -6,26 +6,31 @@ class Button_Menu_paused():
         self.screen = screen
         self.x = x
         self.y = y
-        self.width = 50
-        self.height = 30
+        self.width = 220
+        self.height = 45
         self.button_rect = Rect(self.x, self.y, self.width, self.height)
         self.text = text
         self.font = pygame.font.SysFont('Constantia', 30) #cambriacambriamath , arialblack,calibri, bahnschrift
         self.clicked = False
+        self.space = 30
         self.text_original = (0, 0, 0)
         self.text_click = (255, 255, 255) 
         self.text_base = self.text_original
         self.text_hover = (165, 42, 42)
         self.can_thinking = False
-      
-
+        
 
     #affichage des bouton 
     def draw(self):
         # Créer la police
         text_img = self.font.render(self.text, True, self.text_base)
+
+        # longueur du texte
         text_len = text_img.get_width()
+
+        #affichage du bouton
         self.screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + 10))
+
 
     #couleur du bouton selon action souris et l'action est-elle en cours ?
     def check_button(self, event):
