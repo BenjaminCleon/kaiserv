@@ -33,7 +33,7 @@ class Button_Menu():
                 self.current_col = self.hover_col
         else:
             self.current_col = self.button_col
-            
+        
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.button_rect.collidepoint(pos): self.can_thinking = True
         if self.can_thinking:
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.button_rect.collidepoint(pos):
