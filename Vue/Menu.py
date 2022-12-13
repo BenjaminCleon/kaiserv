@@ -61,12 +61,12 @@ class Menu():
 
         if self.Options.check_button(event):
             self.current = "Options"
-            self.display_settings()
+            self.display_settings(event)
             run = False
 
         if self.Creators.check_button(event):
             self.current = "Creators"
-            self.display_creators()
+            self.display_creators(event)
             run = False
         
         if event.type == pg.QUIT:
@@ -85,7 +85,7 @@ class Menu():
         self.Exit.draw()
         pg.display.flip()
 
-    def display_settings(self):
+    def display_settings(self, event):
         if self.displayed:
 
             pg.display.set_caption(' KaiserV ')
@@ -106,22 +106,22 @@ class Menu():
                 Volume_down.draw()
                 Return.draw()
 
-                if Volume_down.check_button():
+                if Volume_down.check_button(event):
                     if self.volume > 0.0:
                         self.volume -= 0.1
                         pg.mixer.music.set_volume(self.volume)
 
-                if Volume_up.check_button():
+                if Volume_up.check_button(event):
                     if self.volume < 1.0:
                         self.volume += 0.1
                         pg.mixer.music.set_volume(self.volume)
 
-                if Return.check_button():
+                if Return.check_button(event):
                     run = False
                     self.current = "Main"
                     self.display_main()
 
-                if Exit.check_button():
+                if Exit.check_button(event):
                     run = False
                     sys.exit()
 
@@ -132,7 +132,7 @@ class Menu():
 
                 pg.display.flip()
 
-    def display_creators(self):
+    def display_creators(self, event):
         if self.displayed:
 
             #pg.display.set_caption(' keaserV ')
@@ -154,7 +154,7 @@ class Menu():
                                  (self.mid_width * 0.95, self.mid_height + GAP * 3 + 35))
                 Return.draw()
 
-                if Return.check_button():
+                if Return.check_button(event):
                     run = False
                     self.current = "Main"
                     self.display_main()
