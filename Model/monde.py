@@ -1,7 +1,7 @@
 
 # classe permettant de gérer la logique géométrique du monde
-import numpy
 from .building import Building
+from .tente import Tente
 import math
 
 class Monde:
@@ -10,6 +10,12 @@ class Monde:
         self.width, self.height = screen_size
         self.tile_size = tile_size
         self.information_for_each_tile = self.get_information_for_each_tile()
+        self.habitations = []
+        self.ingenieurs  = []
+
+    def update(self):
+        for habitation in self.habitations:
+            habitation.reduce_collapsing_state()
 
     # pour chaque case, nous donnons le rectangle permettant de placer une tile à l'avenir
     def grid_to_board(self, num_lig, num_col, name):
@@ -185,6 +191,7 @@ class Monde:
 
     def get_information_for_each_tile(self):
         dictionnaire = {
+            'engeneer'                               : ['engeneer'                              , True , False, False, 1],
             'panneau'                                : ['panneau'                               , True , True , True , 1],
             'tente'                                  : ['tente'                                 , True , False, False, 1],
             'eau'                                    : ['eau'                                   , False, False, False, 1],
@@ -274,8 +281,17 @@ class Monde:
         return self.board[grid[0]][grid[1]]["building"].can_be_erase
 
     def craft_building(self, infos_building):
+        if ( infos_building[0] == "tente" ): 
+            building = Tente(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
+            self.habitations.append(building)
+            return building
+        if infos_building[0] ==  "engeneer":
+            building = Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
+            self.ingenieurs.append(building)
+        
         return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
 
     def add_building_on_point(self, grid_pos, name):
         infos_building = self.information_for_each_tile[name]
         self.board[grid_pos[0]][grid_pos[1]]["building"] = self.craft_building(infos_building)
+        

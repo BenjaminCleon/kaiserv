@@ -32,6 +32,3 @@ class Adding_Building(SelectionneurZone):
                     return
                     
             if last_grid == grid: self.is_progress = False
-
-    def calcul_distance_to_grid(self, grid_start, grid_stop):
-        return int(math.sqrt((grid_stop[0]-grid_start[0])**2 + (grid_stop[1]-grid_start[1])**2))

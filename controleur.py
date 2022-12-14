@@ -48,6 +48,9 @@ class Controleur:
 
         pygame.exit()
 
+    def get_habitations(self):
+        return self.metier.monde.habitations
+
     def play(self):
         self.playing = True
         self.ihm.pause_menu.displayed = False
@@ -69,6 +72,9 @@ class Controleur:
 
     def get_board(self):
         return self.metier.get_board()
+
+    def add_engeneer(self, grid_start):
+        self.metier.add_engeneer(grid_start)
 
     def create_new_game(self):
         self.metier = Jeu(self, self.TILE_SIZE)

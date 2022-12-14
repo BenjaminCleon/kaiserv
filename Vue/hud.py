@@ -1,5 +1,7 @@
 import pygame as pg
 
+from .adding_engeneer import AddingEngeneer
+
 from .bouton_hud import Button_HUD
 from .adding_building import Adding_Building
 from .clear import Clear
@@ -19,7 +21,7 @@ class HUD:
 
         # ecart entre chaque action de l'hud de droite 
         HORIZONTAL_GAP = self.longueur*0.032
-        VERTICAL_GAP   = self.hauteur *0.034
+        VERTICAL_GAP   = self.hauteur *0.0415
 
         #chargement de l'image
         self.hud_right = pg.image.load("./assets/hud/hud_right.png").convert_alpha()
@@ -31,11 +33,12 @@ class HUD:
         self.hud_top =  pg.transform.scale(self.hud_top, size_hud_top)
 
         # double boucle, pour pouvoir rajouter de future action
-        actions = ["build", "clear", "road", "", "", "", "", "", "", ""]
+        actions = ["build", "clear", "road", "", "", "", "", "", "", "engeneer", "", ""]
         self.button_hud_right = {}
-        for i in range(3):
+        for i in range(4):
             for j in range(3):
-                self.button_hud_right[actions[i*3+j]] = Button_HUD(self.screen,
+                if actions[i*3+j] != "":
+                    self.button_hud_right[actions[i*3+j]] = Button_HUD(self.screen,
                                                                    self.screen.get_width()*0.905+j*HORIZONTAL_GAP,
                                                                    self.screen.get_height()*0.348+i*VERTICAL_GAP ,
                                                                    actions[i*3+j])
@@ -76,6 +79,12 @@ class HUD:
                             if not self.action.is_progress:
                                 self.action.is_progress = True
                                 image = pg.image.load("assets/upscale_road/Land2a_00094.png")
+                                self.action.initialiser(image)
+                        case "engeneer":
+                            if self.action == None: self.action = AddingEngeneer(self.carriere)
+                            if not self.action.is_progress:
+                                self.action.is_progress = True
+                                image = pg.image.load("assets/upscale_land/Land2a_00001.png")
                                 self.action.initialiser(image)
                 elif self.button_hud_right[button].who_is_visible != "image_click":
                     self.button_hud_right[button].who_is_visible = "image_hover"

@@ -1,6 +1,5 @@
 class Walker:
     nb_walker = 0
-    nb_deplacement_max = 10
 
     def __init__(self,actualPosition,destination):
         self.ID = Walker.nb_walker+1
@@ -11,9 +10,10 @@ class Walker:
         self.name = "citizen" #fichier sprite du walker
         self.chemin = None
         self.nombreDeplacement = 0
+        self.nb_deplacement_max = 10
 
     def set_nbdeplacement(self):
-        self.nombreDeplacement = (self.nombreDeplacement+1)%10
+        self.nombreDeplacement = (self.nombreDeplacement+1)%self.nb_deplacement_max
 
     def set_nextPosition(self):
         if self.chemin != None and self.chemin != False and len(self.chemin) > 1:

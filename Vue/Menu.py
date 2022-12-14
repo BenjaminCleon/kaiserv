@@ -42,13 +42,13 @@ class Menu():
         if self.Start_new_career.check_button(event):
             self.Start_new_career.current_col = self.Start_new_career.button_col
             self.controleur.create_new_game()
-            self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
+            self.controleur.metier.init_board(reader_bmp_map(1, self.controleur))
             self.controleur.ihm.init_sprite()
             self.controleur.play()
 
         if self.Load_Saved_Game.check_button(event):
-            if os.path.exists("test.sav"):
-                self.controleur.metier = pickle.load(open("test.sav", 'rb'))
+            if os.path.exists("save.sav"):
+                self.controleur.metier = pickle.load(open("save.sav", 'rb'))
                 # fixe la taille du plateau de jeu
                 self.controleur.grid_height  = len(self.controleur.metier.monde.board)
                 self.controleur.grid_width = len(self.controleur.metier.monde.board[0])

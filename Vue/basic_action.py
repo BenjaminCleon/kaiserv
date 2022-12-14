@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class Basic_Action:
     OPACITY = 180
@@ -20,7 +21,10 @@ class Basic_Action:
         self.original_surface = surface
         self.original_surface.set_alpha(Basic_Action.OPACITY)
         self.image_to_draw = self.original_surface
-        
+    
+    def calcul_distance_to_grid(self, grid_start, grid_stop):
+        return int(math.sqrt((grid_stop[0]-grid_start[0])**2 + (grid_stop[1]-grid_start[1])**2))
+
     def events(self, event):
         if self.is_progress:
             self.pos_without_first_click = pygame.mouse.get_pos()

@@ -44,7 +44,7 @@ class Carriere:
         walkers_infos = self.controleur.get_walker_infos()
         if walkers_infos != None:
             for walker in walkers_infos:
-                if walker.destination != walker.actualPosition and self.informations_tiles[walker.actualPosition[0]][walker.actualPosition[1]]["position_rendu"] != None \
+                if ( walker.name == "citizen" and walker.destination != walker.actualPosition or walker.name == "citizen_engeneer" )and self.informations_tiles[walker.actualPosition[0]][walker.actualPosition[1]]["position_rendu"] != None \
                     and self.informations_tiles[walker.nextPosition[0]][walker.nextPosition[1]]["position_rendu"] != None:
                     coef = walker.nombreDeplacement / walker.nb_deplacement_max
                     image = self.dictionnaire[walker.name]
@@ -65,7 +65,7 @@ class Carriere:
        
     def Save_game(self):
         object = self.controleur.metier
-        filename = "test.sav"
+        filename = "save.sav"
         filehandler = open(filename, 'wb') 
         pickle.dump(object, filehandler)
 
@@ -89,6 +89,16 @@ class Carriere:
 
     def update(self):
         self.camera.update()
+        habitations = self.controleur.get_habitations()
+        should_reload =  False
+        for habitation in habitations:
+            if habitation.should_refresh and habitation.collapsing_state == 0:
+                should_reload = True
+                habitation.name = 'destruction'
+                habitation.should_refresh = False
+
+        if should_reload:
+            self.reload_board()
 
     # initialise chaque sprite à afficher 
     def init_sprite(self):
@@ -98,6 +108,7 @@ class Carriere:
     # permet de récupérer le chemin d'une image
     def get_tile(self):
         dictionnaire = {
+            'destruction'                   : pygame.image.load("assets/upscale_land/Land2a_00114.png").convert_alpha(),
             'while_crafting'                : pygame.image.load("assets/upscale_land/Land2a_00001.png").convert_alpha(),
             'eau'                           : pygame.image.load("assets/upscale_sea/Land1a_00120.png").convert_alpha(),
             'eau_haut'                      : pygame.image.load("assets/upscale_sea/Land1a_00136.png").convert_alpha(),
@@ -148,6 +159,8 @@ class Carriere:
             'panneau'                       : pygame.image.load("assets/upscale_house/Housng1a_00045.png").convert_alpha(),
             'citizen'                       : pygame.image.load("assets/upscale_citizen/Citizen05_00001.png").convert_alpha(),
             'tente'                         : pygame.image.load("assets/upscale_house/Housng1a_00002.png").convert_alpha(),
+            'citizen_engeneer'              : pygame.image.load("assets/upscale_citizen/Citizen01_01226.png").convert_alpha(),
+            'engeneer'                      : pygame.image.load("assets/upscale_house/transport_00056.png").convert_alpha(),
             'route droite'                  : pygame.image.load('assets/upscale_road/Land2a_00093.png').convert_alpha(),
             'route verticale'               : pygame.image.load('assets/upscale_road/Land2a_00094.png').convert_alpha(),
             'route droitebis'               : pygame.image.load('assets/upscale_road/Land2a_00095.png').convert_alpha(),
@@ -178,8 +191,11 @@ class Carriere:
 
     def get_dictionnary_by_path(self):
         dictionnaire = {
-            "assets/upscale_sea/Land2a_00001.png"    : "while_crafting",
-            "assets/upscale_house/Housng1a_00045.png": "panneau"                    ,
+            "assets/upscale_citizen/Citizen01_01226.png":'citizen_engeneer'        ,
+            "assets/upscale_house/transport_00056.png"  :'engeneer'                ,
+            "assets/upscale_house/Land2a_00068.png"  : "destruction"               ,
+            "assets/upscale_sea/Land2a_00001.png"    : "while_crafting"            ,
+            "assets/upscale_house/Housng1a_00045.png": "panneau"                   ,
             "assets/upscale_sea/Land1a_00120.png": 'eau'                           ,
             "assets/upscale_sea/Land1a_00136.png": 'eau_haut'                      ,
             "assets/upscale_sea/Land1a_00128.png": 'eau_bas'                       ,
