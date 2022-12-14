@@ -186,13 +186,11 @@ class Monde:
                     file_names_return[num_lig].append(file_names[num_lig][num_col])
 
         return file_names_return
-                
-
 
     def get_information_for_each_tile(self):
         dictionnaire = {
             'engeneer'                               : ['engeneer'                              , True , False, False, 1],
-            'panneau'                                : ['panneau'                               , True , True , True , 1],
+            'panneau'                                : ['panneau'                               , True , False, True , 1],
             'tente'                                  : ['tente'                                 , True , False, False, 1],
             'eau'                                    : ['eau'                                   , False, False, False, 1],
             'eau_haut'                               : ['eau_haut'                              , False, False, False, 1],
@@ -271,6 +269,9 @@ class Monde:
     def define_matrix_for_path_finding(self):
         return [[self.board[i][j]["building"].get_canbewalkthrough_into_integer() for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
             
+    def define_matrix_for_path_finding_road(self):
+        return [[ 0 if self.board[i][j]["building"].name[0:5] == "route" else 1 for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
+
     def check_if_construction_possible_on_grid(self,grid):
         if grid[0] >= 0 and grid[0] < len(self.board) and grid[1] >= 0 and grid[1] < len(self.board[grid[0]]):
             return self.board[grid[0]][grid[1]]["building"].can_constructible_over
@@ -288,10 +289,12 @@ class Monde:
         if infos_building[0] ==  "engeneer":
             building = Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
             self.ingenieurs.append(building)
+            return building
         
         return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
 
     def add_building_on_point(self, grid_pos, name):
         infos_building = self.information_for_each_tile[name]
-        self.board[grid_pos[0]][grid_pos[1]]["building"] = self.craft_building(infos_building)
-        
+        building = self.craft_building(infos_building)
+        building.set_position_reference(grid_pos)
+        self.board[grid_pos[0]][grid_pos[1]]["building"] = building

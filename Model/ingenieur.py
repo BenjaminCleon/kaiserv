@@ -10,6 +10,11 @@ class Ingenieur(Walker):
         self.old_position = None
         self.nb_deplacement_max = 30
 
+    def reset_position(self, position):
+        self.nextPosition = position
+        self.actualPosition = position
+        self.nombreDeplacement = 0
+
     def find_new_destination(self, monde):
         self.set_nbdeplacement()
         if self.nombreDeplacement == 0:
@@ -20,8 +25,10 @@ class Ingenieur(Walker):
             for coord in matrix:
                 new_grid = (self.actualPosition[0]+coord[0], self.actualPosition[1]+coord[1])
                 if new_grid != self.old_position and new_grid[0] >= 0 and new_grid[1] >= 0 and \
-                new_grid[0] < len(monde.board) and new_grid[1] < len(monde.board[new_grid[0]]) and \
-                monde.board[new_grid[0]][new_grid[1]]["building"].name[0:5] == "route":
+                   new_grid[0] < len(monde.board) and new_grid[1] < len(monde.board[new_grid[0]]) and \
+                   monde.board[new_grid[0]][new_grid[1]]["building"].name[0:5] == "route" or \
+                   monde.board[new_grid[0]][new_grid[1]]["building"].name == "engeneer" and \
+                   monde.board[new_grid[0]][new_grid[1]]["building"].position_reference == self.position_reference:
                     valid_matrix.append(coord)
             
             self.old_position = self.actualPosition

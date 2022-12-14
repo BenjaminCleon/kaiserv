@@ -16,6 +16,8 @@ class Adding_Building(SelectionneurZone):
             last_grid = self.grid_to_draw[len(self.grid_to_draw)-1]
             for grid in self.grid_to_draw:
                 self.treat_event(grid, last_grid)
+            
+            self.is_progress = False
 
     def treat_event(self, grid, last_grid):
         if grid[0] >= 0 and grid[1] >= 0 and len(self.carriere.informations_tiles) > grid[0] and len(self.carriere.informations_tiles[grid[0]]) > grid[1] and \

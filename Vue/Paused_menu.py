@@ -56,7 +56,7 @@ class Pause_menu:
             #
             if self.new_game.check_button(event):
                 self.controleur.create_new_game()
-                self.controleur.metier.init_board(reader_bmp_map(2, self.controleur))
+                self.controleur.metier.init_board(reader_bmp_map(1, self.controleur))
                 self.controleur.ihm.init_sprite()
                 self.controleur.play()
                 self.controleur.paused = False 
