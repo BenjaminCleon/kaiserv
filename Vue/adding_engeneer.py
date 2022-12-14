@@ -5,6 +5,7 @@ class AddingEngeneer(Basic_Action):
     def __init__(self, carriere):
         super().__init__(carriere)
     
+    # permet de draw soit une case de pre-build, soit le bâtiment de l'ingénieur
     def draw(self):
         size_of_original_image = self.original_surface.get_size()
         self.image_to_draw = pygame.transform.scale(self.original_surface, (size_of_original_image[0]*self.carriere.zoom.multiplier, size_of_original_image[1]*self.carriere.zoom.multiplier))
@@ -24,11 +25,14 @@ class AddingEngeneer(Basic_Action):
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and self.can_thinking:
             if self.carriere.controleur.check_if_construction_possible_on_grid(self.grid_position_start):
                 stop_loop = False
+                # si on peux construire sur la zone en question, alors on construit et on ajoute le migrant
+                # on ne peux pas construire à moins de deux cases d'une route
                 for num_lig in range(0, len(self.carriere.informations_tiles)):
                     for num_col in range(0, len(self.carriere.informations_tiles[num_lig])):
                         if stop_loop == False and self.carriere.informations_tiles[num_lig][num_col]["building"].name[0:5] == "route" and \
                            self.calcul_distance_to_grid(self.grid_position_start, (num_lig, num_col)) <= 2:
                                 self.carriere.controleur.add_building_on_point(self.grid_position_start, "engeneer")
+                                # ajout de l'ingénieur
                                 self.carriere.controleur.add_engeneer(self.grid_position_start)
                                 stop_loop = True
                         if stop_loop:
@@ -38,5 +42,5 @@ class AddingEngeneer(Basic_Action):
 
             
             self.is_progress = False
-            self.carriere.reload_board()
+            self.carriere.reload_board() # on raffraichit la carte si on à valider l'action
             

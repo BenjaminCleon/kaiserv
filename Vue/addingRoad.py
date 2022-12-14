@@ -1,8 +1,8 @@
 import pygame
-import math
 
 from .basic_action import Basic_Action
 
+# Classe permettant d'ajouter des routes
 class Adding_Road(Basic_Action):
 
     def __init__(self, surface):
@@ -10,12 +10,11 @@ class Adding_Road(Basic_Action):
         self.can_thinking = False
         self.chemins = None
 
-
     def getChemin(self, start, end):
         if start[0] >= 0 and start[1] >= 0 and len(self.carriere.informations_tiles) > start[0] and len(self.carriere.informations_tiles[start[0]]) > start[1] and \
            end  [0] >= 0 and end  [1] >= 0 and len(self.carriere.informations_tiles) > end  [0] and len(self.carriere.informations_tiles[end  [0]]) > end  [1] and \
                 self.carriere.controleur.check_if_construction_possible_on_grid(start) and self.carriere.controleur.check_if_construction_possible_on_grid(end):
-            self.chemins = self.carriere.controleur.find_path(start, end, False)
+            self.chemins = self.carriere.controleur.find_path_for_road(start, end, False)
 
         if type(self.chemins) == bool or self.chemins == None:
             self.chemins = []

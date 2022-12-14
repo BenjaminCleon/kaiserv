@@ -1,7 +1,6 @@
 import numpy as np
 import heapq
 
-
 def heuristic(a, b):
     return np.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
 

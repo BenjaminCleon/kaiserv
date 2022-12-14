@@ -6,13 +6,14 @@ import math
 
 class Monde:
     def __init__(self, tile_size, screen_size):
-        self.board = []
+        self.board = [] # plateau de jeu à deux dimension avec un dictionnaire contenant tous les bâtiments et des données géométrique
         self.width, self.height = screen_size
         self.tile_size = tile_size
-        self.information_for_each_tile = self.get_information_for_each_tile()
-        self.habitations = []
-        self.ingenieurs  = []
+        self.information_for_each_tile = self.get_information_for_each_tile() # dictionnaire avec les infos pour la construction de batiment
+        self.habitations = [] # bâtiment considérés comme habitation
+        self.ingenieurs  = [] # bâtiment pour les ingénieurs
 
+    # réduit pour chaque habitation leur taux d'effondrement 
     def update(self):
         for habitation in self.habitations:
             habitation.reduce_collapsing_state()
@@ -20,9 +21,9 @@ class Monde:
     # pour chaque case, nous donnons le rectangle permettant de placer une tile à l'avenir
     def grid_to_board(self, num_lig, num_col, name):
         rect = [
-            (num_lig * self.tile_size                            , num_col * self.tile_size            ),
-            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size            ),
-            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size + self.tile_size),
+            (num_lig * self.tile_size                            , num_col * self.tile_size                 ),
+            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size                            ),
+            (num_lig * self.tile_size + self.tile_size, num_col * self.tile_size + self.tile_size           ),
             (num_lig * self.tile_size                            , num_col * self.tile_size + self.tile_size),
         ]
 
@@ -35,11 +36,11 @@ class Monde:
         # retour de la fonction par des informations sur la tuile
         information_building = self.information_for_each_tile[name]
         sortie = {
-            "grid": [num_lig, num_col],
-            "cart_rect": rect,
-            "iso": iso,
-            "position_rendu": [minx, miny],
-            "building": self.craft_building(information_building)
+            "grid": [num_lig, num_col], # l'emplacement dans le plateau
+            "cart_rect": rect,          # le rect avec les value géometrique
+            "iso": iso,                 # pour les calculs de 2D à 2.5D
+            "position_rendu": [minx, miny], # coordonnées de placement au sein d'une surface isométrique
+            "building": self.craft_building(information_building) # bâtiment associé
         }
 
         return sortie
@@ -61,18 +62,21 @@ class Monde:
                 tile_board = self.grid_to_board(num_lig, num_col, file_names[num_lig][num_col])
                 self.board[num_lig].append(tile_board)
 
+    # permet de choisir les bons sprites et de construire les bonnes routes pour l'affichage
+    # l'algorithme utilisé ici est le même que dans la méthode manage_for_water
+    # il est expliqué dans la méthode manage_for_water
     def manage_for_road(self, file_names):
         file_names_return = []
         for num_lig in range(0, len(file_names)):
             file_names_return.append([])
             for num_col in range(0, len(file_names)):
-                if file_names[num_lig][num_col][0:5] == "route":
+                if file_names[num_lig][num_col][0:5] == "route": # verifie que c'est une route
                     coords = [(-1,0),(0,1),(1,0),(0,-1)]
                     binary_array = []
                     for coord in coords:
                         if (num_lig+coord[0]) >= 0 and (num_lig+coord[0]) < len(file_names)    and \
                             (num_col+coord[1] >= 0) and (num_col+coord[1] < len(file_names[num_lig])) and \
-                            file_names[num_lig+coord[0]][num_col+coord[1]][0:5] == "route":
+                            file_names[num_lig+coord[0]][num_col+coord[1]][0:5] == "route": # si le voisin est une route
                             binary_array.append(1)
                         else:
                             binary_array.append(0)
@@ -106,7 +110,29 @@ class Monde:
 
         return file_names_return
 
+    # permet de construire les surfaces d'eau et de récupérer les bons sprites pour le bâtiments
     def manage_for_water(self, file_names):
+        # l'algorithme employés est le suivant
+        """
+        nous regardons toutes les tuiles de notre plateau
+        si la tuile courante est de l'eau alors
+            on regarde tous ces voisins # admettons X est notre tuile on regarde autour de cette manière
+            # (-1,-1)(-1,0)(-1,1)
+            # (0,-1 )   X  (0,1)
+            # (1,-1 )(1,0 )(1,1)
+            on créer un tableau contenant des 0 et des 1 indiquant si le voisin est de l'eau alors
+                on place un 1 sinon 0
+            # le tableau contient donc 8 données = à 0 ou 1, mis bout à bout nous avons comme un code binaire
+            on fait la somme de ce code binaire et le convertit en decimal, par exemple 00010001 = 33
+            la valeur en decimale représente un sprite à utiliser, on détermine le sprite ainsi
+            
+            # Problème de cet algo, nous avons pour l'eau 2^8 possibilités, soit 256
+            # cependant, il n'y à pas 256 sprites différents, nous pouvons avoir le même sprite pour plusieurs valeurs
+            # tous les cas ne sont pas traités, mais suffisament pour faire une carte propre
+
+            # Dans le cas des routes nous n'avons que 16 cas car on ne regarde pas en diagonale, soit 2^4 = 16
+        """
+
         file_names_return = []
         for num_lig  in range(len(file_names)):
             file_names_return.append([])
@@ -114,11 +140,7 @@ class Monde:
                 if file_names[num_lig][num_col] == "eau":
                     binary_traitement = []
                     for coord in [(0,-1),(-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1)]:
-                        """
-                        (-1,-1)(-1,0)(-1,1)
-                        (0,-1 )   X  (0,1)
-                        (1,-1 )(1,0 )(1,1)
-                        """
+                        
                         if (num_lig+coord[0])>=0 and (num_lig+coord[0])<len(file_names) and (num_col+coord[1])>=0 and (num_col+coord[1])<len(file_names[num_lig]) and file_names[num_lig+coord[0]][num_col+coord[1]] == 'eau':
                             binary_traitement.append(1)
                         else:
@@ -187,6 +209,7 @@ class Monde:
 
         return file_names_return
 
+    # contient les informations pour la création de bâtiment
     def get_information_for_each_tile(self):
         dictionnaire = {
             'engeneer'                               : ['engeneer'                              , True , False, False, 1],
@@ -266,9 +289,15 @@ class Monde:
         
         return dictionnaire
 
+    def define_matrix_for_path_finding_road_without_panneau(self):
+        return [[ 0 if self.board[i][j]["building"].name != "panneau" and self.board[i][j]["building"].get_canbewalkthrough_into_integer() == 0 else 1 for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
+
+    # permet de récuper une matrice composer de 0 et 1, utile pour le pathfinding, le 1 représentant un obstacle
     def define_matrix_for_path_finding(self):
         return [[self.board[i][j]["building"].get_canbewalkthrough_into_integer() for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
             
+    # permet de récuper une matrice composer de 0 et 1, utile pour le pathfinding, le 1 représentant un obstacle
+    # tout est obstacle si ce n'est pas une route
     def define_matrix_for_path_finding_road(self):
         return [[ 0 if self.board[i][j]["building"].name[0:5] == "route" else 1 for j in range(0, len(self.board[0]))] for i in range(0,len(self.board)) ]
 
@@ -281,6 +310,7 @@ class Monde:
     def check_if_clear_possible_on_grid(self, grid):
         return self.board[grid[0]][grid[1]]["building"].can_be_erase
 
+    # construit un bâtiment spécifique selon les informations récupérées
     def craft_building(self, infos_building):
         if ( infos_building[0] == "tente" ): 
             building = Tente(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
@@ -293,6 +323,7 @@ class Monde:
         
         return Building(infos_building[0], infos_building[1], infos_building[2], infos_building[3], infos_building[4])
 
+    # ajoute un bâtiment dans le plateau à une certaines coordonées
     def add_building_on_point(self, grid_pos, name):
         infos_building = self.information_for_each_tile[name]
         building = self.craft_building(infos_building)

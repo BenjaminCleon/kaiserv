@@ -1,12 +1,14 @@
 from PIL import Image
 import random
 
+# recupere la taille d'une tuile dans un fichier
 def set_tile_size(file_name):
     with open(file_name) as file_read:
         for i, line in enumerate(file_read):
             if line.__contains__("TILE_SIZE"):
                 return int(line.split("=")[1])
 
+# permet de recuperer les codes rgb de chaques pixel
 def reader_bmp_map(map_number, controleur):
     file = Image.open('./assets/map/map{}.bmp'.format(map_number))
     width, height = file.width, file.height
@@ -20,6 +22,7 @@ def reader_bmp_map(map_number, controleur):
     controleur.grid_height = height
     return names_files
 
+# traite les codes rgb
 def get_name_sprite(rgb_code):
     match rgb_code:
         case ((0,255,0)):

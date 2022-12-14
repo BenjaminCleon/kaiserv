@@ -51,6 +51,7 @@ class IHM:
 
         self.carriere.draw_main_components()
         self.hud.draw()
+        self.carriere.draw_walker()
         draw_text(self.controleur.screen, "Population: {}".format(self.controleur.get_population()), 20, (0,0,0), (self.controleur.screen.get_width()*0.91, self.controleur.screen.get_height()*0.57))
         self.pause_menu.draw()
 

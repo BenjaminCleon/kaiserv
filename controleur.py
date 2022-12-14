@@ -82,6 +82,9 @@ class Controleur:
     def find_path(self,spawn,end, is_manhatan=True):
         return short_path(numpy.array(self.metier.monde.define_matrix_for_path_finding()),spawn,end, is_manhatan)
 
+    def find_path_for_road(self,spawn,end, is_manhatan=True):
+        return short_path(numpy.array(self.metier.monde.define_matrix_for_path_finding_road_without_panneau()),spawn,end, is_manhatan)
+
     def walker_creation(self,depart,destination):
         self.metier.walker_creation(depart,destination)
 

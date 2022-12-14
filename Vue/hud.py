@@ -7,6 +7,7 @@ from .adding_building import Adding_Building
 from .clear import Clear
 from .addingRoad import Adding_Road
 
+# permet de gerer les HUD du haut et de la droite
 class HUD:
     def __init__(self, screen, carriere):
         self.screen   = screen
@@ -33,6 +34,7 @@ class HUD:
         self.hud_top =  pg.transform.scale(self.hud_top, size_hud_top)
 
         # double boucle, pour pouvoir rajouter de future action
+        # permet de gérer ensuite les evenements
         actions = ["build", "clear", "road", "", "", "", "", "", "", "engeneer", "", ""]
         self.button_hud_right = {}
         for i in range(4):
@@ -43,16 +45,19 @@ class HUD:
                                                                    self.screen.get_height()*0.348+i*VERTICAL_GAP ,
                                                                    actions[i*3+j])
 
+    # traite les evenements
     def events(self, event):
         pos = pg.mouse.get_pos()
-        mouse_action = pg.mouse.get_pressed()
 
+        # si nous avons une action en cours alors nous faisons les evenements de cette action
+        # tout est au moins basic_action
         if self.action is not None:
             self.action.events(event)
             if self.action.is_progress == False:
                 self.carriere.reload_board()
                 self.action = None
         
+        # s'il y a colision avec l'un des boutons alors on initialise une action si elle n'existe pas 
         for button in self.button_hud_right:
             if self.button_hud_right[button].rect.collidepoint(pos):
                 # affichage
@@ -61,6 +66,7 @@ class HUD:
                     #interaction 
                 elif event.type == pg.MOUSEBUTTONUP and event.button == 1 and self.button_hud_right[button].who_is_visible == "image_click":
                     match button:
+                        # si nous voulons rajouter des actions, cela devient donc très simple
                         case "build":
                             if self.action == None: self.action = Adding_Building(self.carriere, "assets/upscale_house/Housng1a_00045.png")
                             if not self.action.is_progress:
@@ -68,7 +74,6 @@ class HUD:
                                 image = pg.image.load("assets/upscale_land/Land2a_00001.png")
                                 self.action.initialiser(image)
                         case "clear":
-                            
                             if self.action == None: self.action = Clear(self.carriere, "assets/upscale_land/red_image.png")
                             if not self.action.is_progress:
                                 self.action.is_progress = True
@@ -92,6 +97,7 @@ class HUD:
             else:
                 self.button_hud_right[button].who_is_visible = ""
 
+    # affiche les images et les boutons suite aux evenements
     def draw(self):
         if self.action != None: self.action.draw()
 

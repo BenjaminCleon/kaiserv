@@ -1,6 +1,7 @@
 
 import pygame
 
+# permet d'aller sur les côtes de la carte
 class Camera:
 
     def __init__(self, width, height):
@@ -14,6 +15,7 @@ class Camera:
         self.dy = 0
         self.speed = 25
 
+    # met à jour la caméra 
     def update(self):
         # récupère la position de la souris sur notre écran en pixel 
         mouse_pos = pygame.mouse.get_pos()

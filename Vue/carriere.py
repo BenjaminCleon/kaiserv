@@ -1,45 +1,48 @@
 import pygame
 import pickle
 
-from .menu_button import Button_Menu
 from .camera import Camera
 from .zoom import Zoom
-from .utils import draw_text
 
+# permet de gérer l'affichage de la carte ainsi que les evenements associées
 class Carriere:
     def __init__(self, controleur):
         self.controleur = controleur
         self.width, self.height = self.controleur.screen.get_size()
 
         # camera pour se déplacer dans le monde
-        self.camera = Camera(self.width, self.height)
+        self.camera = Camera(self.width, self.height) # camera de mouvement 
         # path selon tile
         self.dictionnaire = self.get_tile()
         self.dictionnaire_reverse_by_path = self.get_dictionnary_by_path()
         # surface sur lesquels notre map de base s'affiche
-        self.basic_surface = None
-        self.current_surface = None
-        self.basic_surface_size = None
+        self.basic_surface   = None # surface de base, servant de surface de reference 
+        self.current_surface = None # surface actuelle à draw
+        self.basic_surface_size = None # taille de la surface originale
         # informations sur les tuiles
-        self.informations_tiles = None
+        self.informations_tiles = None # informations sur nos tuiles dans notre carte
         # zoom sur la carte
-        self.zoom = Zoom()
-        self.zoom.update(0)
+        self.zoom = Zoom() # gestion du zoom
+        self.zoom.update(0) # met un certain niveau de zoom au début
 
+    # reintialise le zoom et la camera pour se replacer correctement 
     def reset(self):
         self.zoom = Zoom()
         self.zoom.update(0)
         self.camera = Camera(self.width, self.height)
 
+    # draw les composants principaux de notre carriere
     def draw_main_components(self):
+        # on met un fond noir
         self.controleur.screen.fill((0, 0, 0))
-        if self.zoom.should_scale:
+        if self.zoom.should_scale: # si nous devons zoomer alors on scale la surface
             self.current_surface = pygame.transform.scale(self.basic_surface,(self.basic_surface_size[0]*self.zoom.multiplier, self.basic_surface_size[1]*self.zoom.multiplier) )
             self.zoom.should_scale = False
         
+        # on draw la surface
         self.controleur.screen.blit(self.current_surface, (self.camera.scroll.x, self.camera.scroll.y))
-        self.draw_walker()
 
+    # permet d'afficher les walkers de la carte
     def draw_walker(self):
         walkers_infos = self.controleur.get_walker_infos()
         if walkers_infos != None:
@@ -60,15 +63,18 @@ class Carriere:
                     self.controleur.screen.blit(image, positionFinale)
 
     def events(self, event):
+    # met à jour le zoom 
         if event.type == pygame.MOUSEWHEEL:
                 self.zoom.update(event.y)
        
+    # permet d'enregistrer la partie
     def Save_game(self):
         object = self.controleur.metier
         filename = "save.sav"
         filehandler = open(filename, 'wb') 
         pickle.dump(object, filehandler)
 
+    # permet de recharger la surface principale du jeu, utile si notamment, nous changeons des batiments dans la partie
     def reload_board(self):
         self.informations_tiles = self.controleur.get_board()
         self.basic_surface_size = (self.controleur.TILE_SIZE*self.controleur.grid_width*2,
@@ -87,6 +93,7 @@ class Carriere:
         
         self.current_surface = pygame.transform.scale(self.basic_surface,(self.basic_surface_size[0]*self.zoom.multiplier, self.basic_surface_size[1]*self.zoom.multiplier) )
 
+    # met à jour la carriere
     def update(self):
         self.camera.update()
         habitations = self.controleur.get_habitations()
@@ -99,6 +106,7 @@ class Carriere:
 
         if should_reload:
             self.reload_board()
+
 
     # initialise chaque sprite à afficher 
     def init_sprite(self):
@@ -181,14 +189,18 @@ class Carriere:
             'route Carrefour'      : pygame.image.load('assets/upscale_road/Land2a_00110.png').convert_alpha()
         }
 
+        # permet de récupérer les chemins des sprites des arbres
         for i in range(40, 62):
             dictionnaire["arbre_{}".format(i)] = pygame.image.load('assets/upscale_land/Land1a_000{}.png'.format(i)).convert_alpha()
 
+        # peremt de récuperer les herbes existantes
         for i in range(110, 120):
             dictionnaire["herbe_{}".format(i)] = pygame.image.load('assets/upscale_land/Land1a_00{}.png'.format(i)).convert_alpha()
 
         return dictionnaire
 
+    # dictionnaire inverse, utile pour recuper, un nom de sprite selon le path
+    # utilise pour peu de nom en réalité, mais dans un souvis d'anticipation, nous avons set pour tout le monde
     def get_dictionnary_by_path(self):
         dictionnaire = {
             "assets/upscale_citizen/Citizen01_01226.png":'citizen_engeneer'        ,
