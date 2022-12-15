@@ -115,7 +115,7 @@ class Jeu:
                                         is_conserve_engeneer = True
 
                             if not is_conserve_engeneer:
-                                walker.reset_position(position_reference)  
+                                walker.reset_position()  
                                 break  
 
     
